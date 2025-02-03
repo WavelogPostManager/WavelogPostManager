@@ -180,3 +180,5 @@ wpm/
 *.docx
 
 *.db
+
+.docx
