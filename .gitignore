@@ -168,4 +168,15 @@ cython_debug/
 #.idea/
 
 # PyPI configuration file
-.pypirc
+.pypir/
+
+# toml config
+*.toml
+wpm/
+
+.idea/
+*.png
+*.jpg
+*.docx
+
+*.db
