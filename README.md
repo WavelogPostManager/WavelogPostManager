@@ -17,7 +17,7 @@ pip3 install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple wavelogpost
 *Dev*  
 
 ```shell
-pip3 install -i https://test.pypi.org/simple/ weauth
+pip3 install -i https://test.pypi.org/simple/ wavelogpostmanager
 ```
 
 
