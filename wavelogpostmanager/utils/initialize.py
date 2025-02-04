@@ -47,6 +47,7 @@ def init() -> None:
     os.makedirs("wpm/log", exist_ok=True)
     print(f"-{L.get('init_complete','blue')}")
 
+
 def download_file(url, save_path):
     print(f"-{L.get('downloading_templates','green')}{save_path}")
     try:

@@ -113,9 +113,8 @@ en = {
     # generate_example_contacts_toml.py
     "g_c_done": "Template generated in ./contacts_example.toml",
     # initialize.py
-    "wpm_folder_exists":"wpm folder already exists",
-    "downloading_templates":"Downloading templates to ",
-    "error_when_downloading":"Error when downloading templates: ",
-    "init_complete":"Initialize Completed!",
-
+    "wpm_folder_exists": "wpm folder already exists",
+    "downloading_templates": "Downloading templates to ",
+    "error_when_downloading": "Error when downloading templates: ",
+    "init_complete": "Initialize Completed!",
 }
