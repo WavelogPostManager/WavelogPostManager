@@ -16,8 +16,8 @@ PACKAGE_NAME = "wavelogpostmanager"
 CLI_COMMAND = NAME_SHORT
 
 # WavelogPostManager Version Storage
-VERSION_PYPI: str = "0.0.1b2"
-VERSION: str = "0.0.1-beta2"
+VERSION_PYPI: str = "0.0.1b3"
+VERSION: str = "0.0.1-beta3"
 
 API_VERSION = 1.0
 

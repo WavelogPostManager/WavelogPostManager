@@ -36,7 +36,7 @@ def main() -> None:
         config_context.ssl,
         config_context.ssl_ca,
         config_context.ssl_key,
-        config_context.port,
+        ConfigContext.config["web_service"]["port"],
         listener=listener,
         url=config_context.url_route,
     )
