@@ -23,10 +23,10 @@ class MailBot:
 
     @classmethod
     def test_connection(cls) -> int:
-        message = MIMEText("wdw email test", "plain", "utf-8")
+        message = MIMEText("WavelogPostManager email test", "plain", "utf-8")
         message["From"] = cls.user
         message["To"] = "qcqwcqwc@eveq.com"
-        message["Subject"] = "wdw email test subject"
+        message["Subject"] = "wpm email test subject"
 
         try:
             if cls.ssl:
@@ -55,7 +55,7 @@ class MailBot:
         )
         message["From"] = cls.user
         message["To"] = cls.receiving
-        message["Subject"] = f"[wdw]New Sign-off QSL card by {callsign}"
+        message["Subject"] = f"[WavelogPostManager]New Sign-off QSL card by {callsign}"
         try:
             if cls.ssl:
                 with smtplib.SMTP_SSL(cls.host, cls.port) as server:
@@ -96,7 +96,7 @@ class MailBot:
         )
         message["From"] = cls.user
         message["To"] = email
-        message["Subject"] = f"[wdw]The QSL card from {my_callsign} has been mailed!"
+        message["Subject"] = f"[WavelogPostManager]The QSL card from {my_callsign} has been mailed!"
         try:
             if cls.ssl:
                 with smtplib.SMTP_SSL(cls.host, cls.port) as server:
