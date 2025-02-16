@@ -1,4 +1,12 @@
-# WavelogPostManager
+WavelogPostManager
+-------------------  
+
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/wavelogpostmanager)](https://pypi.org/project/wavelogpostmanager)
+[![PyPI - Version](https://img.shields.io/pypi/v/wavelogpostmanager)](https://pypi.org/project/wavelogpostmanager)
+[![GitHub License](https://img.shields.io/github/license/WavelogPostManager/WavelogPostManager)](https://github.com/WavelogPostManager/WavelogPostManager/blob/main/LICENSE)
+
+
+<div align=center><img src="logo/banner_grey.png"></div>
 QSL cards post status management for Wavelog.
 
 > This project is under development.
