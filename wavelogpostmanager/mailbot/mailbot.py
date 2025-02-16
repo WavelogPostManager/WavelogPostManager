@@ -96,7 +96,9 @@ class MailBot:
         )
         message["From"] = cls.user
         message["To"] = email
-        message["Subject"] = f"[WavelogPostManager]The QSL card from {my_callsign} has been mailed!"
+        message["Subject"] = (
+            f"[WavelogPostManager]The QSL card from {my_callsign} has been mailed!"
+        )
         try:
             if cls.ssl:
                 with smtplib.SMTP_SSL(cls.host, cls.port) as server:

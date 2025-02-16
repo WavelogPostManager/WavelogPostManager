@@ -40,14 +40,14 @@ zh_cn = {
     "callsign_no_exists": "Callsign not found!",
     "error_get_contact": "Unknown error during fetch contact",
     "update_guide": "Please enter the number:\n(0) Change Callsign\n"
-                    "(1) Change Country or Region\n"
-                    "(2) Change Address\n"
-                    "(3) Change Name\n"
-                    "(4) Change Zip Code\n"
-                    "(5) Change Email\n"
-                    "(6) Change Phone\n"
-                    "(d) Delete this contact\n"
-                    "enter [e] to exit",
+    "(1) Change Country or Region\n"
+    "(2) Change Address\n"
+    "(3) Change Name\n"
+    "(4) Change Zip Code\n"
+    "(5) Change Email\n"
+    "(6) Change Phone\n"
+    "(d) Delete this contact\n"
+    "enter [e] to exit",
     "update_": "Please enter new ",
     "update_failed": "Update failed!",
     "update_success": "Update succeed!",
@@ -70,17 +70,17 @@ zh_cn = {
     "no_queue": "There is no queued QSL to send.",
     # contacts.py
     "contact_entry_guide": "-Please enter the number:\n"
-                           "(0) Create new contact\n"
-                           "(1) Update or Delete contact\n"
-                           "(2) Search contact by callsign\n"
-                           "(3) Show all contacts\n"
-                           "(4) Load Contact file (toml)\n"
-                           "(5) Generate Contact template (toml)\n"
-                           "enter [e] to exit",
+    "(0) Create new contact\n"
+    "(1) Update or Delete contact\n"
+    "(2) Search contact by callsign\n"
+    "(3) Show all contacts\n"
+    "(4) Load Contact file (toml)\n"
+    "(5) Generate Contact template (toml)\n"
+    "enter [e] to exit",
     "path_contact": "Please enter the path of contact file",
     # queue.py
     "set_sent_confirm": "Do you want to set these QSL status as Sent? (y/n) \n"
-                        "(wdw will send emails to those HAMs if you've configured) ",
+    "(wdw will send emails to those HAMs if you've configured) ",
     "set_sent_confirm_completed": "Queued QSLs have been set as Sent status",
     # local_load_contact_by_toml.py
     "field_missing1": " is missing in ",
