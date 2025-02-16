@@ -35,7 +35,7 @@ zh_cn = {
     "address": "Address",
     "name": "Name",
     "create_confirm1": "This is your new contact",
-    "create_confirm2": "Are you sure add it into your Contacts (y/n)",
+    "create_confirm2": "Are you sure add it into your Contacts (y/n)\n>",
     "create_confirm_cancel": "Discard",
     "callsign_no_exists": "Callsign not found!",
     "error_get_contact": "Unknown error during fetch contact",
