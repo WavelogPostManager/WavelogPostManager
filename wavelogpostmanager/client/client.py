@@ -380,8 +380,17 @@ class Client:
         for c in add_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
             callsign = new_contact["callsign"]
+            _contact = {
+                "CALLSIGN": new_contact["callsign"],
+                "ZIP_CODE": new_contact["zip_code"],
+                "COUNTRY": new_contact["country"],
+                "ADDRESS": new_contact["address"],
+                "EMAIL": new_contact["email"],
+                "NAME": new_contact["name"],
+                "PHONE": new_contact["phone"],
+            }
             response = Client.send_request_new_contact(
-                action="contact_create_push", callsign=callsign, contact=new_contact
+                action="contact_create_push", callsign=callsign, contact=_contact
             )
             if response["action"] == "pass":
                 print(f"-{L.get('create_contact_success', 'blue')}{callsign}")
@@ -397,7 +406,16 @@ class Client:
         for c in update_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
             callsign = new_contact["callsign"]
-            Client.update_contact_by_callsign(contact=new_contact, callsign=callsign)
+            _contact = {
+                "CALLSIGN": new_contact["callsign"],
+                "ZIP_CODE": new_contact["zip_code"],
+                "COUNTRY": new_contact["country"],
+                "ADDRESS": new_contact["address"],
+                "EMAIL": new_contact["email"],
+                "NAME": new_contact["name"],
+                "PHONE": new_contact["phone"],
+            }
+            Client.update_contact_by_callsign(contact=_contact, callsign=callsign)
 
         return 0
 
