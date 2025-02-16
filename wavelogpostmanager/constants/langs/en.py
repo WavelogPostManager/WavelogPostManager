@@ -35,7 +35,7 @@ en = {
     "address": "Address",
     "name": "Name",
     "create_confirm1": "This is your new contact",
-    "create_confirm2": "Are you sure add it into your Contacts (y/n)",
+    "create_confirm2": "Are you sure add it into your Contacts (y/n)\n>",
     "create_confirm_cancel": "Discard",
     "callsign_no_exists": "Callsign not found!",
     "error_get_contact": "Unknown error during fetch contact",
@@ -113,9 +113,8 @@ en = {
     # generate_example_contacts_toml.py
     "g_c_done": "Template generated in ./contacts_example.toml",
     # initialize.py
-    "wpm_folder_exists":"wpm folder already exists",
-    "downloading_templates":"Downloading templates to ",
-    "error_when_downloading":"Error when downloading templates: ",
-    "init_complete":"Initialize Completed!",
-
+    "wpm_folder_exists": "wpm folder already exists",
+    "downloading_templates": "Downloading templates to ",
+    "error_when_downloading": "Error when downloading templates: ",
+    "init_complete": "Initialize Completed!",
 }

@@ -27,7 +27,7 @@ def load_contact(path) -> int:
     callsign_list = [c.upper() for c in callsign_list]
     for c in new_contact:
         c["callsign"] = c["callsign"].upper()
-    ContactsProcessor.add_contact_by_toml(callsign=callsign_list, contacts=new_contact)
+    Client.add_contact_by_toml(callsign=callsign_list, contacts=new_contact)
     return 0
 
 
