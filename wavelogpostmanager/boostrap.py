@@ -13,6 +13,7 @@ from wavelogpostmanager.database import MysqlDAO, SignoffDAO, ContactsDAO
 import sys
 from wavelogpostmanager.listener import Listener
 from wavelogpostmanager.mailbot import MailBot
+from wavelogpostmanager.constants.languages import Language as L
 
 
 def main() -> None:
@@ -31,35 +32,37 @@ def main() -> None:
         sys.exit(0)
 
     listener = Listener(config_context, mysql_context)
-
+    is_ssl = ConfigContext.config["web_service"]["ssl"]
+    ssl_ca = ConfigContext.config["web_service"]["ssl_ca"]
+    ssl_key = ConfigContext.config["web_service"]["ssl_key"]
     server_start(
-        config_context.ssl,
-        config_context.ssl_ca,
-        config_context.ssl_key,
-        ConfigContext.config["web_service"]["port"],
+        is_ssl=is_ssl,
+        ssl_ca=ssl_ca,
+        ssl_key=ssl_key,
         listener=listener,
+        port=ConfigContext.config["web_service"]["port"],
         url=config_context.url_route,
     )
 
 
 def server_start(
-    ssl_: bool, ssl_ca: str, ssl_key: str, port: int, listener: Listener, url: str
+    is_ssl: bool, ssl_ca: str, ssl_key: str, port: int, listener: Listener, url: str
 ):
-    if ssl_:
+    if is_ssl:
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         try:
             ssl_context.load_cert_chain(certfile=ssl_ca, keyfile=ssl_key)
         except FileNotFoundError:
-            print("-SSL ca/key not found!")
+            print(f"-{L.get('ssl_not_found','red')}")
             sys.exit(0)
         server = pywsgi.WSGIServer(
             ("0.0.0.0", port),
             application=listener.wpm_service,
             ssl_context=ssl_context,
         )
-        print(f"-Web Server starts in https://0.0.0.0:{port}{url}")
+        print(f"-{L.get('listening_on','blue')}https://0.0.0.0:{port}{url}")
         server.serve_forever()
     else:
         server = pywsgi.WSGIServer(("0.0.0.0", port), listener.wpm_service)
-        print(f"-Web Server starts in http://0.0.0.0:{port}{url}")
+        print(f"-{L.get('listening_on','blue')}http://0.0.0.0:{port}{url}")
         server.serve_forever()
