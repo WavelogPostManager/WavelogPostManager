@@ -139,7 +139,7 @@ def create_new_contact() -> int:
     }
     print(f"-{L.get('create_confirm1')}")
     table_show(new_contact)
-    if input(f"-{L.get('create_confirm2', 'green')}") != "y":
+    if input(f"-{L.get('create_confirm2', 'green')}\n>") != "y":
         print(f"-{L.get('create_confirm_cancel')}")
         return -1
     response = Client.send_request_new_contact(
