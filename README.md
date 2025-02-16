@@ -32,4 +32,4 @@ wpm -s       # 查看已发出的QSL卡片信息
 wpm -v       # 查看版本
 ```
 
-这个项目还在内测当中，如有任何问题，欢迎在issues中提出，或到[QQ群](https://qm.qq.com/q/p7hWsqZ7ji)进行交流。
+这个项目还在内测当中，如有任何问题，欢迎在issues中提出，或到[QQ群](https://qm.qq.com/q/4zN5oGALJC)进行交流。
