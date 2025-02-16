@@ -6,7 +6,7 @@ WavelogPostManager
 [![GitHub License](https://img.shields.io/github/license/WavelogPostManager/WavelogPostManager)](https://github.com/WavelogPostManager/WavelogPostManager/blob/main/LICENSE)
 
 
-<div align=center><img src="logo/banner_grey.png"></div>
+<div align=center><img src="logo/banner_grey.png" alt="Logo" width="60%"></div>
 QSL cards post status management for Wavelog.
 
 > This project is under development.
