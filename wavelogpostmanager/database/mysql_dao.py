@@ -87,6 +87,7 @@ class MysqlDAO:
             sql_command = f"SELECT COL_CALL, COL_QSLRDATE, COL_QSLSDATE, COL_QSL_RCVD, COL_QSL_SENT, COL_TIME_ON, COL_PRIMARY_KEY FROM {cls.table_name} WHERE COL_STATION_CALLSIGN = '{callsign}'"
             cursor.execute(sql_command)
             results = cursor.fetchall()
+            print(results)
             cursor.close()
             connection.close()
         except mysql.connector.Error as e:
@@ -126,3 +127,7 @@ class MysqlDAO:
         cursor.close()
         connection.close()
         return 0
+
+
+
+
