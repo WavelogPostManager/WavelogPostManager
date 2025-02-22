@@ -117,4 +117,12 @@ en = {
     "downloading_templates": "Downloading templates to ",
     "error_when_downloading": "Error when downloading templates: ",
     "init_complete": "Initialize Completed!",
+    # boostrap.py
+    "ssl_not_found": "SSL ca/key not found!",
+    "listening_on": "Web Server starts in ",
+    # show_mode.py
+    "show_mode1":"Current mode: ",
+    "local":"Local",
+    "server":"Server",
+    "client":"Client",
 }
