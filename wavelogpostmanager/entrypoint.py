@@ -95,7 +95,7 @@ def entrypoint():
     )
     args = parser.parse_args()
     if args.test:
-        from wavelogpostmanager.test_entrypoint import test
+        from wavelogpostmanager.connection_test_entrypoint import test
 
         test()
         sys.exit(0)

@@ -73,8 +73,7 @@ class ContactsProcessor:
 
         print(f"-{L.get('create_confirm1')}")
         table_show(new_contact)
-        print(f"-{L.get('create_confirm2', 'green')}")
-        if input() != "y":
+        if input(f"-{L.get('create_confirm2', 'green')}\n>") != "y":
             print(f"-{L.get('create_confirm_cancel')}")
             return -1
 
