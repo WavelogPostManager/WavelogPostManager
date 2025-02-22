@@ -127,7 +127,3 @@ class MysqlDAO:
         cursor.close()
         connection.close()
         return 0
-
-
-
-

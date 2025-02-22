@@ -121,8 +121,8 @@ en = {
     "ssl_not_found": "SSL ca/key not found!",
     "listening_on": "Web Server starts in ",
     # show_mode.py
-    "show_mode1":"Current mode: ",
-    "local":"Local",
-    "server":"Server",
-    "client":"Client",
+    "show_mode1": "Current mode: ",
+    "local": "Local",
+    "server": "Server",
+    "client": "Client",
 }
