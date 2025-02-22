@@ -99,7 +99,7 @@ class Listener:
             token = request.args.get("token")
             callsign = SignoffProcessor.get_callsign_by_token(token)
             if callsign is None:
-                return "Invalid"
+                return "<div>Invalid</div>"
             else:
                 return render_template("signoff.html", callsign=callsign.upper())
 

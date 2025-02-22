@@ -119,7 +119,7 @@ class MysqlDAO:
         )
         cursor = connection.cursor()
         try:
-            sql_command = f"UPDATE {cls.table_name} SET COL_QSL_SENT='Y' WHERE COL_PRIMARY_KEY={idx}"
+            sql_command = f"UPDATE {cls.table_name} SET COL_QSL_SENT='Y', COL_QSLSDATE=CURRENT_TIMESTAMP WHERE COL_PRIMARY_KEY={idx}"
             cursor.execute(sql_command)
             connection.commit()
         except mysql.connector.Error as e:
