@@ -82,12 +82,12 @@ class MysqlDAO:
             ConfigContext.config_initialize()
             callsign = ConfigContext.config["global"]["callsign"]
             callsign = callsign.upper()
-            print(callsign)
+            # print(callsign)
             cursor = connection.cursor()
             sql_command = f"SELECT COL_CALL, COL_QSLRDATE, COL_QSLSDATE, COL_QSL_RCVD, COL_QSL_SENT, COL_TIME_ON, COL_PRIMARY_KEY FROM {cls.table_name} WHERE COL_STATION_CALLSIGN = '{callsign}'"
             cursor.execute(sql_command)
             results = cursor.fetchall()
-            print(results)
+            # print(results)
             cursor.close()
             connection.close()
         except mysql.connector.Error as e:
