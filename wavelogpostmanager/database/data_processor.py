@@ -70,7 +70,7 @@ class DataProcessor:
                 )
                 for t in qso_list
             ]
-        elif date_type == "sent" or date_type == "queued":
+        elif date_type == "sent":
             return [
                 (
                     t[0],  # callsign
@@ -83,6 +83,20 @@ class DataProcessor:
                 )
                 for t in qso_list
             ]
+        elif date_type == "queued":
+            return [
+                (
+                    t[0],  # callsign
+                    t[1],  # r-date
+                    "2025-02-22",  # s-date
+                    t[3],  # is received
+                    t[4],  # is sent
+                    t[5].strftime("%Y-%m-%d-%H_%M_%S"),  # qso datetime
+                    int(t[6]),  # index in wavelog
+                )
+                for t in qso_list
+            ]
+
 
     @staticmethod
     def _output(qso_list: list, rs: str) -> list:
