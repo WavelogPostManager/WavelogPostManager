@@ -24,6 +24,7 @@ class SignoffDAO:
         "TOKEN",
         "STATUS",  # "PENDING" or "DONE"
         "RCVD_DATE",
+        "SIGNOFF_TIMES",
     ]
 
     @classmethod
