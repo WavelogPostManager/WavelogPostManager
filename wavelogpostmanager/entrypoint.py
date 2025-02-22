@@ -102,7 +102,7 @@ def entrypoint():
 
     if args.version:
         print(
-            "WavelogPostManager version {}\nBuild time: {}z\nLICENSE: MIT\nProject Homepage: {}".format(
+            "WavelogPostManager version {}\nBuild time: {}Z\nLICENSE: MIT\nProject Homepage: {}".format(
                 core_constant.VERSION,
                 core_constant.BUILD_TIME,
                 core_constant.GITHUB_URL,

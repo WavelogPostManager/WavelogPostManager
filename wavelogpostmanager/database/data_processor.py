@@ -97,7 +97,6 @@ class DataProcessor:
                 for t in qso_list
             ]
 
-
     @staticmethod
     def _output(qso_list: list, rs: str) -> list:
         formatted_list = DataProcessor._datetime_transformer(

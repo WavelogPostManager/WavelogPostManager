@@ -10,6 +10,7 @@ import os
 import sqlite3
 from typing import Optional
 import datetime
+from datetime import timedelta
 
 
 class SignoffDAO:
@@ -98,9 +99,19 @@ class SignoffDAO:
             cursor.execute(
                 f"""
                     INSERT INTO "{cls.table_name}" 
-                    VALUES (?,?, ?, ?, ?, ?, ?,?)
+                    VALUES (?,?, ?, ?, ?, ?, ?,?,?)
                 """,
-                (index, callsign, qso_date, queue_date, sent_date, token, status, None),
+                (
+                    index,
+                    callsign,
+                    qso_date,
+                    queue_date,
+                    sent_date,
+                    token,
+                    status,
+                    None,
+                    "0",
+                ),
             )
             conn.commit()
             code = 0
@@ -119,7 +130,7 @@ class SignoffDAO:
         cursor = conn.cursor()
         cursor.execute(
             f"""
-                SELECT STATUS 
+                SELECT STATUS
                 FROM "{cls.table_name}" 
                 WHERE TOKEN=?
             """,
@@ -131,9 +142,58 @@ class SignoffDAO:
         if result is None:
             return "UNKNOWN_TOKEN"
         elif result[0] == "PENDING":
-            return "PENDING"
+            if SignoffDAO._signoff_check(token):
+                return "PENDING"
+            return "USED_TOKEN"
         else:
             return "USED_TOKEN"
+
+    @classmethod
+    def _signoff_check(cls, token: str) -> bool:
+        cls.initialize()
+        cls.init()
+        conn = sqlite3.connect(cls.database_path)
+        cursor = conn.cursor()
+        cursor.execute(
+            f"""
+                        SELECT STATUS,QUEUE_DATE,SIGNOFF_TIMES
+                        FROM "{cls.table_name}" 
+                        WHERE TOKEN=?
+                    """,
+            (token,),
+        )
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        expire_day: int = ConfigContext.config["web_service"]["sign_off_day"]
+        max_sign_off_times: int = ConfigContext.config["web_service"][
+            "max_sign_off_times"
+        ]
+
+        now = datetime.datetime.now()
+        expire_delta = timedelta(days=expire_day)
+        queue_date = datetime.datetime.fromisoformat(result[1])
+        expire_date = queue_date + expire_delta
+
+        if result[2] is None:
+            if now < expire_date:
+                SignoffDAO.set_done(token=token, count="1")
+                return True
+            else:
+                SignoffDAO.set_done(token=token, count="1")
+                return False
+        else:
+            count = int(result[2])
+            if count < max_sign_off_times:
+                if now < expire_date:
+                    SignoffDAO.set_done(token=token, count=str(count + 1))
+                    return True
+                else:
+                    SignoffDAO.set_done(token=token, count=str(count + 1))
+                    return False
+            else:
+                return False
 
     @classmethod
     def set_rcvd_time(cls, token: str, time: str):
@@ -175,7 +235,9 @@ class SignoffDAO:
         elif result[6] != "PENDING":
             return False
         elif result[6] == "PENDING":
-            return True
+            if SignoffDAO._signoff_check(token):
+                return True
+            return False
 
     @classmethod
     def get_callsign(cls, token: str) -> str:
@@ -197,7 +259,7 @@ class SignoffDAO:
         return result[0]
 
     @classmethod
-    def set_done(cls, token: str):
+    def set_done(cls, token: str, count: str = "1", status: str = "PENDING"):
         cls.initialize()
         cls.init()
         conn = sqlite3.connect(cls.database_path)
@@ -205,10 +267,10 @@ class SignoffDAO:
         cursor.execute(
             f"""
                 UPDATE "{cls.table_name}" 
-                SET STATUS="DONE" 
+                SET STATUS=?, SIGNOFF_TIMES=?
                 WHERE TOKEN=?
             """,
-            (token,),
+            (status, count, token),
         )
         conn.commit()
         cursor.close()

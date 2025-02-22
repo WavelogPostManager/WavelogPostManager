@@ -149,6 +149,8 @@ def create_toml(path: str, config: dict) -> None:
     )
     web_table.add(comment("签收/发送网页的缓存时间（单位：秒）"))
     web_table.add("cache_time", config["web_service"]["cache_time"])
+    web_table.add("sign_off_day", config["web_service"]["sign_off_day"])
+    web_table.add("max_sign_off_times", config["web_service"]["max_sign_off_times"])
 
     # build-in database
 

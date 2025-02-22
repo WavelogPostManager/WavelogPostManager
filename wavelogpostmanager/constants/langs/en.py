@@ -103,7 +103,7 @@ en = {
     "TOKEN": "Sign-off Token",
     "STATUS": "Sign-off Status",
     "RCVD_DATE": "Sign-off Date",
-    "SIGNOFF_TIMES":"Sign-off Times",
+    "SIGNOFF_TIMES": "Sign-off Times",
     # client_contact.py
     "status_code_wrong": "Status code is not 200",
     "connection_server_success": "Successfully connect to server",
