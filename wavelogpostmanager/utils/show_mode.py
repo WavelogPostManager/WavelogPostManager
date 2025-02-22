@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 # author： NearlyHeadlessJack
 # email: wang@rjack.cn
-# datetime： 2025/2/16 22:13 
+# datetime： 2025/2/16 22:13
 # ide： PyCharm
 # file: show_mode.py
 from wavelogpostmanager.config import ConfigContext
 from wavelogpostmanager.constants.languages import Language as L
 import sys
+
+
 def show_mode():
     ConfigContext.config_initialize()
     mode = ConfigContext.config["global"]["mode"]

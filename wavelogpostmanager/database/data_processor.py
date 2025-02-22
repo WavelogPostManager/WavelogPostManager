@@ -51,7 +51,7 @@ class DataProcessor:
         elif remove_type == "sent":
             return [t for t in qso_list if t[2] is not None and t[4] == "Y"]
         elif remove_type == "queued":
-            return [t for t in qso_list if t[2] is not None and t[4] == "Q"]
+            return [t for t in qso_list if t[4] == "Q"]
         else:
             raise ValueError("-Invalid filter type")
 
