@@ -32,7 +32,7 @@ default_config = {
         "max_list": 15,
         "limit": 6,
         "cache_time": 300,
-        "sign_off_day": 7,
+        "sign_off_day": 30,
         "max_sign_off_times": 3,
     },
     "build_in_database": {
