@@ -99,7 +99,12 @@ class Listener:
             token = request.args.get("token")
             callsign = SignoffProcessor.get_callsign_by_token(token)
             if callsign is None:
-                return "<div>Invalid</div>"
+                return render_template(
+                    "404.html",
+                    title="Sign-off Failed",
+                    status="Invalid sign-off code",
+                    alt="",
+                )
             else:
                 return render_template("signoff.html", callsign=callsign.upper())
 
@@ -118,6 +123,15 @@ class Listener:
             data = request.get_json()
             return_json = json.dumps(Server.request_handler_request(data))
             return return_json
+
+        @self.wpm_service.errorhandler(404)
+        def page_not_found(error):
+            return (
+                render_template(
+                    "404.html", title="404", status="Invalid Request", alt=""
+                ),
+                404,
+            )
 
 
 def callsign_str_transformer(data: list) -> list:
