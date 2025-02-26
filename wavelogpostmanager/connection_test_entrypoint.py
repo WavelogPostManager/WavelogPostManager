@@ -19,6 +19,9 @@ def test_go():
         ConfigContext.config_path = "./wpm/wpm.toml"
         ConfigContext.db_path = "./wpm/wpm.db"
     ConfigContext.config_initialize()
+    from wavelogpostmanager.utils.show_mode import show_mode
+
+    show_mode()
     from wavelogpostmanager.client import Client
 
     test_server_connection = Client.test_connection()

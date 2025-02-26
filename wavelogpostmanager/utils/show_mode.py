@@ -14,10 +14,13 @@ def show_mode():
     ConfigContext.config_initialize()
     mode = ConfigContext.config["global"]["mode"]
     if mode == "local":
+        print(f"-{L.get('show_mode1')}{L.get('local', 'green')}")
         pass
     elif mode == "server":
+        print(f"-{L.get('show_mode1')}{L.get('server', 'green')}")
         pass
     elif mode == "client":
+        print(f"-{L.get('show_mode1')}{L.get('client', 'green')}")
         pass
     else:
         print(f"-{L.get('mode_wrong', 'red')}")

@@ -39,7 +39,7 @@ class MysqlDAO:
                 database=cls.database,
             )
             if connection.is_connected():
-                print("\033[32m -Successfully connected to MySQL database\033[0m")
+                print("-\033[32mSuccessfully connected to MySQL database\033[0m")
                 connection.close()
                 return 0
             else:

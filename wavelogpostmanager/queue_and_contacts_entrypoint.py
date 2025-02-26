@@ -19,9 +19,11 @@ def queue():
         ConfigContext.db_path = "./wpm/wpm.db"
 
     ConfigContext.config_initialize()
+    from wavelogpostmanager.utils.show_mode import show_mode
 
+    show_mode()
     mode = ConfigContext.config["global"]["mode"]
-    print(mode)
+
     if mode == "local" or mode == "server":
         from wavelogpostmanager.local_queue import queue
 
@@ -45,7 +47,9 @@ def contacts():
         ConfigContext.config_path = "./wpm/wpm.toml"
         ConfigContext.db_path = "./wpm/wpm.db"
     ConfigContext.config_initialize()
+    from wavelogpostmanager.utils.show_mode import show_mode
 
+    show_mode()
     mode = ConfigContext.config["global"]["mode"]
     if mode == "local" or mode == "server":
         from wavelogpostmanager.local_contacts import contacts
