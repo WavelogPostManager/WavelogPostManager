@@ -31,6 +31,9 @@ def init() -> None:
         "https://gitee.com/NHJ2001/wmp/raw/master/web.html", "./wpm/templates/web.html"
     )
     download_file(
+        "https://gitee.com/NHJ2001/wmp/raw/master/404.html", "./wpm/templates/404.html"
+    )
+    download_file(
         "https://gitee.com/NHJ2001/wmp/raw/master/DL.docx", "./wpm/templates/DL.docx"
     )
     download_file(

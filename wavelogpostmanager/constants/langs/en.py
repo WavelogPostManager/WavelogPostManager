@@ -7,8 +7,8 @@
 # file: en.py
 en = {
     # docx_generator.py
-    "template_not_found": "template.docx not found",
-    "template_not_found_hint": "please put template.docx into ",
+    "template_not_found": "template file not found",
+    "template_not_found_hint": "please put template file into ",
     "merge_completed": "envelops generate successfully! Check in ",
     "folder_not_exist": "folder not exist: ",
     "delete_failed": "delete failed",
@@ -103,6 +103,7 @@ en = {
     "TOKEN": "Sign-off Token",
     "STATUS": "Sign-off Status",
     "RCVD_DATE": "Sign-off Date",
+    "SIGNOFF_TIMES": "Sign-off Times",
     # client_contact.py
     "status_code_wrong": "Status code is not 200",
     "connection_server_success": "Successfully connect to server",

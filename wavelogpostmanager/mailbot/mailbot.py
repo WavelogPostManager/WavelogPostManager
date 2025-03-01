@@ -48,7 +48,8 @@ class MailBot:
 
     @classmethod
     def send_notification(cls, rtime: str, callsign: str) -> int:
-        if not cls.enable:
+        enable = ConfigContext.config["email_bot"]["notify_receiver"]
+        if not enable:
             return 0
         message = MIMEText(
             f"{callsign} just received your QSL card at {rtime}", "plain", "utf-8"

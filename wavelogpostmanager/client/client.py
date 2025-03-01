@@ -506,6 +506,7 @@ def table_show(contact: dict, from_DB=True):
 
 
 def table_show_signoff(signoff: list):
+    # print(signoff)
     table = prettytable.PrettyTable()
     table.field_names = [
         L.get("ID"),
@@ -515,6 +516,7 @@ def table_show_signoff(signoff: list):
         L.get("TOKEN"),
         L.get("STATUS"),
         L.get("RCVD_DATE"),
+        L.get("SIGNOFF_TIMES"),
     ]
     for s in signoff:
         table.add_row(
@@ -526,6 +528,7 @@ def table_show_signoff(signoff: list):
                 s["TOKEN"],
                 s["STATUS"],
                 s["RCVD_DATE"],
+                s["SIGNOFF_TIMES"],
             ]
         )
     print(table)

@@ -24,6 +24,9 @@ def main() -> None:
         ConfigContext.db_path = "./wpm/wpm.db"
     ConfigContext.config_initialize()
     config_context.config_init()
+    from wavelogpostmanager.utils.show_mode import show_mode
+
+    show_mode()
     MailBot.init()
     ContactsDAO.initialize()
     SignoffDAO.initialize()
