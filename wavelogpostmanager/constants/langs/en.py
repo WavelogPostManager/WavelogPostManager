@@ -7,8 +7,8 @@
 # file: en.py
 en = {
     # docx_generator.py
-    "template_not_found": "template.docx not found",
-    "template_not_found_hint": "please put template.docx into ",
+    "template_not_found": "template file not found",
+    "template_not_found_hint": "please put template file into ",
     "merge_completed": "envelops generate successfully! Check in ",
     "folder_not_exist": "folder not exist: ",
     "delete_failed": "delete failed",
