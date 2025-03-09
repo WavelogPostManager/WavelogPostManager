@@ -46,7 +46,7 @@ email = "bd@gamesci.com.cn"
     with open("contacts_example.toml", "w+", encoding="utf-8") as f:
         f.write(data.as_string())
 
-    print(f"-{L.get('g_c_done','blue')}")
+    print(f"-{L.get('g_c_done','blue')}{os.getcwd()}/contacts_example.toml")
 
 
 if __name__ == "__main__":
