@@ -78,6 +78,8 @@ zh_cn = {
     "(5) 生成联系人模板文件 (toml)\n"
     "输入 [e] 退出",
     "path_contact": "请输入联系人文件路径",
+    "no_file": "未找到文件: ",
+    "toml_format_error": "错误: 该文件不符合TOML语法",
     # queue.py
     "set_sent_confirm": "是否将这些QSL状态标记为已发送？(y/n)\n"
     "（若已配置邮件服务，系统将自动发送通知）",
@@ -112,7 +114,7 @@ zh_cn = {
     # queue_and_contacts_entrypoint.py
     "mode_wrong": "模式错误",
     # generate_example_contacts_toml.py
-    "g_c_done": "模板已生成至 ./contacts_example.toml",
+    "g_c_done": "模板已生成至 ",
     # initialize.py
     "wpm_folder_exists": "wpm文件夹已存在",
     "downloading_templates": "正在下载模板至 ",

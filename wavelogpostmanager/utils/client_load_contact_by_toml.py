@@ -16,7 +16,10 @@ def load_contact(path) -> int:
         with open(path, "rb") as f:
             file_toml = tomli.load(f)
     except FileNotFoundError:
-        print(f"-{path} not found. ")
+        print(f"-{L.get('no_file','red')}{path}")
+        sys.exit(0)
+    except tomli.TOMLDecodeError:
+        print(f"-{L.get('toml_format_error','red')}")
         sys.exit(0)
 
     from wavelogpostmanager.client import Client
@@ -42,7 +45,7 @@ def add_single(contacts: list) -> (list, list):
                 contact = null_transformer(contact)
                 print(contact)
             else:
-                return 0
+                sys.exit(0)
         else:
             contact = null_transformer(contact)
             new_contact.append(contact)

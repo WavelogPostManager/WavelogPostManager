@@ -340,7 +340,7 @@ class Client:
                 update_callsign_list=update_list,
                 contacts=contacts,
             )
-            # ConfigContext.cl()
+            ConfigContext.cl()
             print(f"-{L.get('add_update_success', 'blue')}")
             return 0
         else:
