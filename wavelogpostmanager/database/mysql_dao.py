@@ -39,7 +39,7 @@ class MysqlDAO:
                 database=cls.database,
             )
             if connection.is_connected():
-                print("\033[32m -Successfully connected to MySQL database\033[0m")
+                print("-\033[32mSuccessfully connected to MySQL database\033[0m")
                 connection.close()
                 return 0
             else:
@@ -82,12 +82,12 @@ class MysqlDAO:
             ConfigContext.config_initialize()
             callsign = ConfigContext.config["global"]["callsign"]
             callsign = callsign.upper()
-            print(callsign)
+            # print(callsign)
             cursor = connection.cursor()
             sql_command = f"SELECT COL_CALL, COL_QSLRDATE, COL_QSLSDATE, COL_QSL_RCVD, COL_QSL_SENT, COL_TIME_ON, COL_PRIMARY_KEY FROM {cls.table_name} WHERE COL_STATION_CALLSIGN = '{callsign}'"
             cursor.execute(sql_command)
             results = cursor.fetchall()
-            print(results)
+            # print(results)
             cursor.close()
             connection.close()
         except mysql.connector.Error as e:
@@ -119,7 +119,7 @@ class MysqlDAO:
         )
         cursor = connection.cursor()
         try:
-            sql_command = f"UPDATE {cls.table_name} SET COL_QSL_SENT='Y' WHERE COL_PRIMARY_KEY={idx}"
+            sql_command = f"UPDATE {cls.table_name} SET COL_QSL_SENT='Y', COL_QSLSDATE=CURRENT_TIMESTAMP WHERE COL_PRIMARY_KEY={idx}"
             cursor.execute(sql_command)
             connection.commit()
         except mysql.connector.Error as e:
@@ -127,7 +127,3 @@ class MysqlDAO:
         cursor.close()
         connection.close()
         return 0
-
-
-
-

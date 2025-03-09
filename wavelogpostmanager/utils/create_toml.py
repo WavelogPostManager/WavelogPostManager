@@ -149,6 +149,18 @@ def create_toml(path: str, config: dict) -> None:
     )
     web_table.add(comment("签收/发送网页的缓存时间（单位：秒）"))
     web_table.add("cache_time", config["web_service"]["cache_time"])
+    web_table.add(nl())
+    web_table.add(
+        comment("sign_off_day: when will sign-off code expire after being queued")
+    )
+    web_table.add(comment("签收码有效天数"))
+    web_table.add("sign_off_day", config["web_service"]["sign_off_day"])
+    web_table.add(nl())
+    web_table.add(
+        comment("max_sign_off_times: counts that a sign-off code can be used")
+    )
+    web_table.add(comment("签收码可使用次数"))
+    web_table.add("max_sign_off_times", config["web_service"]["max_sign_off_times"])
 
     # build-in database
 

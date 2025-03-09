@@ -89,8 +89,7 @@ class SignoffProcessor:
         if not SignoffDAO.search_token(token=token):
             return None
         callsign = SignoffDAO.get_callsign(token=token)
-        SignoffDAO.set_done(token=token)
-        time = datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S")
+        time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         SignoffDAO.set_rcvd_time(token=token, time=time)
         sending = threading.Thread(
             target=send_email,
@@ -104,6 +103,10 @@ class SignoffProcessor:
 
 
 def send_email(time: str, callsign: str) -> int:
+    from wavelogpostmanager.config import ConfigContext
+
+    ConfigContext.config_initialize()
+
     from wavelogpostmanager.mailbot import MailBot
 
     MailBot.send_notification(time, callsign)

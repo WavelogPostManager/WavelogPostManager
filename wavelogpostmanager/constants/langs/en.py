@@ -7,8 +7,8 @@
 # file: en.py
 en = {
     # docx_generator.py
-    "template_not_found": "template.docx not found",
-    "template_not_found_hint": "please put template.docx into ",
+    "template_not_found": "template file not found",
+    "template_not_found_hint": "please put template file into ",
     "merge_completed": "envelops generate successfully! Check in ",
     "folder_not_exist": "folder not exist: ",
     "delete_failed": "delete failed",
@@ -78,6 +78,8 @@ en = {
     "(5) Generate Contact template (toml)\n"
     "enter [e] to exit",
     "path_contact": "Please enter the path of contact file",
+    "no_file": "No file found in ",
+    "toml_format_error": "error: Not a TOML format file",
     # queue.py
     "set_sent_confirm": "Do you want to set these QSL status as Sent? (y/n) \n"
     "(wdw will send emails to those HAMs if you've configured) ",
@@ -103,6 +105,7 @@ en = {
     "TOKEN": "Sign-off Token",
     "STATUS": "Sign-off Status",
     "RCVD_DATE": "Sign-off Date",
+    "SIGNOFF_TIMES": "Sign-off Times",
     # client_contact.py
     "status_code_wrong": "Status code is not 200",
     "connection_server_success": "Successfully connect to server",
@@ -111,7 +114,7 @@ en = {
     # queue_and_contacts_entrypoint.py
     "mode_wrong": "Incorrect mode",
     # generate_example_contacts_toml.py
-    "g_c_done": "Template generated in ./contacts_example.toml",
+    "g_c_done": "Template generated in ",
     # initialize.py
     "wpm_folder_exists": "wpm folder already exists",
     "downloading_templates": "Downloading templates to ",
