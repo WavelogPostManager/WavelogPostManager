@@ -340,7 +340,7 @@ class Client:
                 update_callsign_list=update_list,
                 contacts=contacts,
             )
-            ConfigContext.cl()
+            # ConfigContext.cl()
             print(f"-{L.get('add_update_success', 'blue')}")
             return 0
         else:
@@ -379,6 +379,7 @@ class Client:
     ) -> int:
         for c in add_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
+            print(f"new_contact:{new_contact}")
             callsign = new_contact["callsign"]
             _contact = {
                 "CALLSIGN": new_contact["callsign"],
@@ -389,19 +390,20 @@ class Client:
                 "NAME": new_contact["name"],
                 "PHONE": new_contact["phone"],
             }
+            print(f"_contact:{_contact}")
             response = Client.send_request_new_contact(
                 action="contact_create_push", callsign=callsign, contact=_contact
             )
             if response["action"] == "pass":
                 print(f"-{L.get('create_contact_success', 'blue')}{callsign}")
-                return 0
-                pass
+                continue
             elif response["action"] == "failed":
                 print(f"-{L.get('create_failed', 'red')}")
-                return -1
+                sys.exit(1)
             else:
                 print("-Unknown error")
                 sys.exit(1)
+
 
         for c in update_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
