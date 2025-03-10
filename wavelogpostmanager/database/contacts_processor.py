@@ -388,6 +388,9 @@ class ContactsProcessor:
     def update_confirm(callsign: str, new_contact: dict) -> bool:
         old = ContactsDAO.get_contact_by_callsign(callsign=callsign)
         new = new_contact
+        old, new, is_changed = check_diff(old, new)
+        if not is_changed:
+            return False
         print(f"-{L.get('update_callsign_old','blue')}")
         table_show(old)
         print(f"-{L.get('update_callsign_new', 'blue')}")
@@ -450,6 +453,22 @@ def table_show(contact: dict, from_DB=True):
         )
     print(table)
 
+
+def red(s: str) -> str:
+    return "\033[31m" + s + "\033[0m"
+
+def green(s: str) -> str:
+    return "\033[32m" + s + "\033[0m"
+
+def check_diff(old:dict,new:dict)->(dict,dict,bool):
+    keys = ["country","address","name","zip_code","phone","email"]
+    is_changed = False
+    for key in keys:
+        if old[key.upper()] != new[key]:
+            old[key.upper()] = red(old[key.upper()])
+            new[key] = green(new[key])
+            is_changed = True
+    return old,new,is_changed
 
 if __name__ == "__main__":
     ContactsProcessor.create_new_contact()
