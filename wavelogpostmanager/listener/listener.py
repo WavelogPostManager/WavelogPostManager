@@ -18,7 +18,6 @@ import os
 
 class Listener:
     def __init__(self, config_context: ConfigContext, mysql_context: MySqlContext):
-        ConfigContext.config_initialize()
         self.port = ConfigContext.config["web_service"]["port"]
         self.url = ConfigContext.config["web_service"]["url_route"]
         self.api_url = ConfigContext.config["web_service"]["api_route"]

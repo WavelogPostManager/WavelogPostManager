@@ -12,13 +12,6 @@ import os
 
 
 def test_go():
-    debug = os.environ.get("DEBUG")
-    from wavelogpostmanager.config import ConfigContext
-
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-    ConfigContext.config_initialize()
     from wavelogpostmanager.utils.show_mode import show_mode
 
     show_mode()

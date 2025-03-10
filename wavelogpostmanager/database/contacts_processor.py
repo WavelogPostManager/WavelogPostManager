@@ -457,18 +457,21 @@ def table_show(contact: dict, from_DB=True):
 def red(s: str) -> str:
     return "\033[31m" + s + "\033[0m"
 
+
 def green(s: str) -> str:
     return "\033[32m" + s + "\033[0m"
 
-def check_diff(old:dict,new:dict)->(dict,dict,bool):
-    keys = ["country","address","name","zip_code","phone","email"]
+
+def check_diff(old: dict, new: dict) -> (dict, dict, bool):
+    keys = ["country", "address", "name", "zip_code", "phone", "email"]
     is_changed = False
     for key in keys:
         if old[key.upper()] != new[key]:
             old[key.upper()] = red(old[key.upper()])
             new[key] = green(new[key])
             is_changed = True
-    return old,new,is_changed
+    return old, new, is_changed
+
 
 if __name__ == "__main__":
     ContactsProcessor.create_new_contact()

@@ -17,12 +17,7 @@ from wavelogpostmanager.constants.languages import Language as L
 
 
 def main() -> None:
-    debug = os.environ.get("DEBUG")
     config_context = ConfigContext()
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-    ConfigContext.config_initialize()
     config_context.config_init()
     from wavelogpostmanager.utils.show_mode import show_mode
 

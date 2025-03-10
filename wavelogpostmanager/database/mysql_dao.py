@@ -79,7 +79,6 @@ class MysqlDAO:
                 password=cls.password,
                 database=cls.database,
             )
-            ConfigContext.config_initialize()
             callsign = ConfigContext.config["global"]["callsign"]
             callsign = callsign.upper()
             # print(callsign)

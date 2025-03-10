@@ -361,7 +361,7 @@ class Client:
     def update_confirm(callsign: str, new_contact: dict) -> bool:
         old = Client.get_contact(callsign=callsign)
         new = new_contact
-        old,new,is_changed = check_diff(old,new)
+        old, new, is_changed = check_diff(old, new)
         if not is_changed:
             return False
         print(f"-{L.get('update_callsign_old', 'blue')}")
@@ -406,7 +406,6 @@ class Client:
             else:
                 print("-Unknown error")
                 sys.exit(1)
-
 
         for c in update_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
@@ -538,18 +537,21 @@ def table_show_signoff(signoff: list):
         )
     print(table)
 
+
 def red(s: str) -> str:
     return "\033[31m" + s + "\033[0m"
+
 
 def green(s: str) -> str:
     return "\033[32m" + s + "\033[0m"
 
-def check_diff(old:dict,new:dict)->(dict,dict,bool):
-    keys = ["country","address","name","zip_code","phone","email"]
+
+def check_diff(old: dict, new: dict) -> (dict, dict, bool):
+    keys = ["country", "address", "name", "zip_code", "phone", "email"]
     is_changed = False
     for key in keys:
         if old[key.upper()] != new[key]:
             old[key.upper()] = red(old[key.upper()])
             new[key] = green(new[key])
             is_changed = True
-    return old,new,is_changed
+    return old, new, is_changed

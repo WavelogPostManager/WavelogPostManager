@@ -13,11 +13,6 @@ import os
 
 
 def sign_list_show():
-    debug = os.environ.get("DEBUG")
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-    ConfigContext.config_initialize()
     from wavelogpostmanager.utils.show_mode import show_mode
 
     show_mode()

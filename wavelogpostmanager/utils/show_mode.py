@@ -11,7 +11,6 @@ import sys
 
 
 def show_mode():
-    ConfigContext.config_initialize()
     mode = ConfigContext.config["global"]["mode"]
     if mode == "local":
         print(f"-{L.get('show_mode1')}{L.get('local', 'green')}")

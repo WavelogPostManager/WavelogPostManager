@@ -104,9 +104,6 @@ class SignoffProcessor:
 
 def send_email(time: str, callsign: str) -> int:
     from wavelogpostmanager.config import ConfigContext
-
-    ConfigContext.config_initialize()
-
     from wavelogpostmanager.mailbot import MailBot
 
     MailBot.send_notification(time, callsign)

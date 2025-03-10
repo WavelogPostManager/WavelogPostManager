@@ -14,7 +14,6 @@ import prettytable
 
 def client_contacts_go() -> int:
     config_context = ConfigContext()
-    ConfigContext.config_initialize()
     config_context.config_init()
     Client.initialize()
     test_server_connection = Client.test_connection()

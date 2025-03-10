@@ -59,7 +59,6 @@ def docx_generate_test_go():
             "phone_number": "555-555-5559",
         },
     ]
-    ConfigContext.config_initialize()
     from wavelogpostmanager.docx_generator import DocxGenerator
 
     DocxGenerator.generate_envelops_docx(qso_list)

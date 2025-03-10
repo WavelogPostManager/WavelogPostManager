@@ -7,18 +7,11 @@
 # file: queue_and_contacts_entrypoint.py
 import sys
 from wavelogpostmanager.constants.languages import Language as L
+from wavelogpostmanager.config import ConfigContext
 import os
 
 
 def queue():
-    debug = os.environ.get("DEBUG")
-    from wavelogpostmanager.config import ConfigContext
-
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-
-    ConfigContext.config_initialize()
     from wavelogpostmanager.utils.show_mode import show_mode
 
     show_mode()
@@ -40,13 +33,6 @@ def queue():
 
 
 def contacts():
-    debug = os.environ.get("DEBUG")
-    from wavelogpostmanager.config import ConfigContext
-
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-    ConfigContext.config_initialize()
     from wavelogpostmanager.utils.show_mode import show_mode
 
     show_mode()
