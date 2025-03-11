@@ -55,6 +55,19 @@ class Language:
             else:
                 raise ValueError("color must be green, red, blue, yellow or default")
 
+    @classmethod
+    def print(cls, key: str, color="default"):
+        if color == "green":
+            print(f"-{cls.get(key,'green')}")
+        elif color == "red":
+            print(f"-{cls.get(key,'red')}")
+        elif color == "blue":
+            print(f"-{cls.get(key,'blue')}")
+        elif color == "yellow":
+            print(f"-{cls.get(key,'yellow')}")
+        elif color == "default":
+            print(f"-{cls.get(key)}")
+
 
 def green(s: str) -> str:
     return "\033[32m" + s + "\033[0m"
