@@ -24,8 +24,8 @@ default_config = {
     "web_service": {
         "port": 80,
         "ssl": False,
-        "ssl_ca": "./ssl/fullchain.pem",
-        "ssl_key": "./ssl/private.key",
+        "ssl_ca": "fullchain.pem",
+        "ssl_key": "private.key",
         "url_route": "/qsl",
         "api_route": "/api",
         "sign_off_route": "signoff",

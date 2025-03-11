@@ -14,7 +14,7 @@ import tomli
 class ConfigContext:
     wpm_folder_path = "./wpm"
     config_path = wpm_folder_path + "/wpm.toml"
-    db_path = wpm_folder_path + "wpm.db"
+    db_path = wpm_folder_path + "/wpm.db"
     templates_path = wpm_folder_path + "/templates"
     ssl_path = wpm_folder_path + "/ssl"
     docx_path = wpm_folder_path + "/docx"
@@ -56,7 +56,7 @@ class ConfigContext:
     @classmethod
     def config_initialize(cls):
         cls.config_path = cls.wpm_folder_path + "/wpm.toml"
-        cls.db_path = cls.wpm_folder_path + "wpm.db"
+        cls.db_path = cls.wpm_folder_path + "/wpm.db"
         cls.templates_path = cls.wpm_folder_path + "/templates"
         cls.ssl_path = cls.wpm_folder_path + "/ssl"
         cls.docx_path = cls.wpm_folder_path + "/docx"
