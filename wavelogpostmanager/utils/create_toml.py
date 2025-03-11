@@ -162,24 +162,15 @@ def create_toml(path: str, config: dict) -> None:
     web_table.add(comment("签收码可使用次数"))
     web_table.add("max_sign_off_times", config["web_service"]["max_sign_off_times"])
 
-    # build-in database
-
-    building_db_table = table()
-    building_db_table.add(
-        comment("Build-in database stores contacts and signoff database")
-    )
-    building_db_table.add(
-        comment("内建数据库保存通讯录信息和发出的的QSL卡片签收数据库")
-    )
-    building_db_table.add("database_path", config["build_in_database"]["database_path"])
-
     # docx_generator
     docx_generator_table = table()
     docx_generator_table.add(
-        comment("template_path: Path to template for envelope generation system")
+        comment(
+            "template_file: template used to generate envelope docx (in ./templates folder)"
+        )
     )
-    docx_generator_table.add(comment("信封生成模版的位置"))
-    docx_generator_table.add("template_path", config["docx_generator"]["template_path"])
+    docx_generator_table.add(comment("生成信封使用的信封模版(储存在templates文件夹中)"))
+    docx_generator_table.add("template_file", config["docx_generator"]["template_file"])
     docx_generator_table.add(nl())
 
     docx_generator_table.add(
@@ -227,7 +218,6 @@ def create_toml(path: str, config: dict) -> None:
     doc.add("global", global_table)
     doc.add("database", db_table)
     doc.add("web_service", web_table)
-    doc.add("build_in_database", building_db_table)
     doc.add("docx_generator", docx_generator_table)
     doc.add("email_bot", email_bot_table)
     doc.add("client", client_table)

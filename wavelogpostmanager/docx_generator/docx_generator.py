@@ -49,7 +49,7 @@ class DocxGenerator:
     @staticmethod
     def _check_template() -> int:
         template_path = get_template_path(
-            ConfigContext.config["docx_generator"]["template_path"]
+            ConfigContext.config["docx_generator"]["template_file"]
         )
         if not os.path.exists(template_path):
             print(f"-{L.get('template_not_found')}")
@@ -65,7 +65,7 @@ class DocxGenerator:
 
         for idx, qso in enumerate(qso_list):
             template_path = get_template_path(
-                ConfigContext.config["docx_generator"]["template_path"]
+                ConfigContext.config["docx_generator"]["template_file"]
             )
             doc = Document(template_path)
             for paragraph in doc.paragraphs:
