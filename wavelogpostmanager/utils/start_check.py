@@ -50,7 +50,7 @@ def create_new():
         sys.exit(1)
     print(f"-{L.get('no_wpm_file','blue')}{wpm_folder_path}")
     doc = document()
-    doc.add("path", wpm_folder_path)
+    doc.add("path", str(wpm_folder_path))
     with open(Path.home() / ".wpm", "w+", encoding="utf-8") as f:
         f.write(doc.as_string())
 
