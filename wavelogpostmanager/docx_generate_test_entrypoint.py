@@ -14,9 +14,6 @@ def docx_generate_test_go():
 
     from wavelogpostmanager.config import ConfigContext
 
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
     qso_list = [
         {
             "zip_code": "123456",

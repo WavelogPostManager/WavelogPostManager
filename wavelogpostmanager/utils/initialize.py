@@ -51,7 +51,7 @@ def init(path="wpm", check_mode=False) -> None:
     )
 
     os.makedirs(path + "/docx", exist_ok=True)
-    os.makedirs(path + "/log", exist_ok=True)
+    os.makedirs(path + "/logs", exist_ok=True)
     print(f"-{L.get('init_complete','blue')}")
 
 

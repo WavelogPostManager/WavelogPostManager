@@ -23,8 +23,7 @@ class Listener:
         self.api_url = ConfigContext.config["web_service"]["api_route"]
         self.signoff = ConfigContext.config["web_service"]["sign_off_route"]
 
-        current_dir = os.getcwd()
-        template_dir = os.path.join(current_dir, "templates")
+        template_dir = ConfigContext.templates_path
 
         self.wpm_service = Flask(__name__, template_folder=template_dir)
         self.wpm_service.config["CACHE_TYPE"] = "SimpleCache"

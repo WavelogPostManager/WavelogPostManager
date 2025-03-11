@@ -12,23 +12,17 @@ import tomli
 
 
 class ConfigContext:
-    config_path = r"./wpm.toml"
-    db_path = r"./wpm.db"
+    wpm_folder_path = "./wpm"
+    config_path = wpm_folder_path + "/wpm.toml"
+    db_path = wpm_folder_path + "wpm.db"
+    templates_path = wpm_folder_path + "/templates"
+    ssl_path = wpm_folder_path + "/ssl"
+    docx_path = wpm_folder_path + "/docx"
+    log_path = wpm_folder_path + "/logs"
     config: dict = {}
 
     def __init__(self):
-
-        self.wpm_db_path = "wpm.db"
         self.__mysql = MySqlContext()
-        self.callsign = "BG9JDQ"
-        self.port = 80
-        self.ssl = False
-        # ca_path
-        self.ssl_ca = ""
-        # key_path
-        self.ssl_key = ""
-        self.url_route = "/"
-        self.api_route = "api"
 
     def _set_mysql_context(self, **kwargs):
         for key, value in kwargs.items():
@@ -61,6 +55,12 @@ class ConfigContext:
 
     @classmethod
     def config_initialize(cls):
+        cls.config_path = cls.wpm_folder_path + "/wpm.toml"
+        cls.db_path = cls.wpm_folder_path + "wpm.db"
+        cls.templates_path = cls.wpm_folder_path + "/templates"
+        cls.ssl_path = cls.wpm_folder_path + "/ssl"
+        cls.docx_path = cls.wpm_folder_path + "/docx"
+        cls.log_path = cls.wpm_folder_path + "/logs"
         from wavelogpostmanager.constants.default_config import default_config
 
         try:

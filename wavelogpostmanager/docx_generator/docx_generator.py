@@ -24,11 +24,11 @@ from wavelogpostmanager.config import ConfigContext
 
 class DocxGenerator:
     # default generator folder
-    path = r"./docx"
+    path = ConfigContext.docx_path
     # hidden folder of docx
-    mid_folder = r".docx"
+    mid_folder = path + "/.docx"
     # hidden folder of img
-    img_folder = r".img"
+    img_folder = path + "/.img"
     # qr generate config
     qr_context = {
         "version": 1,

@@ -14,19 +14,27 @@ from wavelogpostmanager.constants.languages import Language as L
 from wavelogpostmanager.utils.initialize import init
 
 
-def start_check():
-    user_home = Path.home()
-    wpm_file_path = user_home / ".wpm"
-    if not wpm_file_path.is_file():
-        create_new()
-    try:
-        with open(wpm_file_path, "rb") as f:
-            file_toml = tomli.load(f)
-    except Exception as e:
-        print(e)
-        sys.exit(1)
-    wpm_folder_path = file_toml["path"]
-    init(path=wpm_folder_path, check_mode=True)
+def start_check() -> str:
+    if os.environ.get("DOCKER") == "1":
+        wpm_folder_path = "/wpm-root/wpm"
+        init(path=wpm_folder_path, check_mode=True)
+    elif os.environ.get("DEBUG") == "1":
+        wpm_folder_path = "./wpm"
+        init(path=wpm_folder_path, check_mode=True)
+    else:
+        user_home = Path.home()
+        wpm_file_path = user_home / ".wpm"
+        if not wpm_file_path.is_file():
+            create_new()
+        try:
+            with open(wpm_file_path, "rb") as f:
+                file_toml = tomli.load(f)
+        except Exception as e:
+            print(e)
+            sys.exit(1)
+        wpm_folder_path = file_toml["path"]
+        init(path=wpm_folder_path, check_mode=True)
+    return wpm_folder_path
 
 
 def create_new():
