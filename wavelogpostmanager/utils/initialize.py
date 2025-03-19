@@ -18,7 +18,7 @@ def init(path="wpm", check_mode=False) -> None:
     except FileExistsError:
         if check_mode:
             return
-        print(f"-{L.get('wpm_folder_exists','yellow')}")
+        print(f"-{L.get('wpm_folder_exists', 'yellow')}")
         sys.exit(1)
     os.makedirs(path + "/ssl", exist_ok=True)
     from wavelogpostmanager.constants.default_config import default_config
@@ -52,11 +52,11 @@ def init(path="wpm", check_mode=False) -> None:
 
     os.makedirs(path + "/docx", exist_ok=True)
     os.makedirs(path + "/logs", exist_ok=True)
-    print(f"-{L.get('init_complete','blue')}")
+    print(f"-{L.get('init_complete', 'blue')}")
 
 
 def download_file(url, save_path):
-    print(f"-{L.get('downloading_templates','green')}{save_path}")
+    print(f"-{L.get('downloading_templates', 'green')}{save_path}")
     try:
         response = requests.get(url, stream=True, timeout=4)
         response.raise_for_status()
@@ -65,7 +65,7 @@ def download_file(url, save_path):
                 if chunk:
                     f.write(chunk)
     except requests.exceptions.RequestException as e:
-        print(f"-{L.get('error_when_downloading','red')}{e}")
+        print(f"-{L.get('error_when_downloading', 'red')}{e}")
 
 
 if __name__ == "__main__":

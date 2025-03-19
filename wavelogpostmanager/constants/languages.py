@@ -58,13 +58,13 @@ class Language:
     @classmethod
     def print(cls, key: str, color="default"):
         if color == "green":
-            print(f"-{cls.get(key,'green')}")
+            print(f"-{cls.get(key, 'green')}")
         elif color == "red":
-            print(f"-{cls.get(key,'red')}")
+            print(f"-{cls.get(key, 'red')}")
         elif color == "blue":
-            print(f"-{cls.get(key,'blue')}")
+            print(f"-{cls.get(key, 'blue')}")
         elif color == "yellow":
-            print(f"-{cls.get(key,'yellow')}")
+            print(f"-{cls.get(key, 'yellow')}")
         elif color == "default":
             print(f"-{cls.get(key)}")
 

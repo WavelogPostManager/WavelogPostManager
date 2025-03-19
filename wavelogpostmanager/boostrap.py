@@ -51,16 +51,16 @@ def server_start(
         try:
             ssl_context.load_cert_chain(certfile=ssl_ca, keyfile=ssl_key)
         except FileNotFoundError:
-            print(f"-{L.get('ssl_not_found','red')}")
+            print(f"-{L.get('ssl_not_found', 'red')}")
             sys.exit(0)
         server = pywsgi.WSGIServer(
             ("0.0.0.0", port),
             application=listener.wpm_service,
             ssl_context=ssl_context,
         )
-        print(f"-{L.get('listening_on','blue')}https://0.0.0.0:{port}{url}")
+        print(f"-{L.get('listening_on', 'blue')}https://0.0.0.0:{port}{url}")
         server.serve_forever()
     else:
         server = pywsgi.WSGIServer(("0.0.0.0", port), listener.wpm_service)
-        print(f"-{L.get('listening_on','blue')}http://0.0.0.0:{port}{url}")
+        print(f"-{L.get('listening_on', 'blue')}http://0.0.0.0:{port}{url}")
         server.serve_forever()

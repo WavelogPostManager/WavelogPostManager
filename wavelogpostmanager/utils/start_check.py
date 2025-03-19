@@ -48,7 +48,7 @@ def create_new():
     else:
         print("-Unknown System")
         sys.exit(1)
-    print(f"-{L.get('no_wpm_file','blue')}{wpm_folder_path}")
+    print(f"-{L.get('no_wpm_file', 'blue')}{wpm_folder_path}")
     doc = document()
     doc.add("path", str(wpm_folder_path))
     with open(Path.home() / ".wpm", "w+", encoding="utf-8") as f:

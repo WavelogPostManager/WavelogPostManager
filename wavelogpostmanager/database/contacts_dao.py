@@ -41,7 +41,7 @@ class ContactsDAO:
 
         create_table_query = f"""
                 CREATE TABLE IF NOT EXISTS "{cls.table_name}" (
-                    {', '.join(columns)}
+                    {", ".join(columns)}
                 )
             """
 
@@ -86,8 +86,8 @@ class ContactsDAO:
             return 1
 
         insert_query = f"""
-                    INSERT INTO {cls.table_name} ({', '.join(cls.column_names)})
-                    VALUES ({', '.join(['?'] * len(cls.column_names))})
+                    INSERT INTO {cls.table_name} ({", ".join(cls.column_names)})
+                    VALUES ({", ".join(["?"] * len(cls.column_names))})
                 """
         try:
             conn = sqlite3.connect(cls.database_path)
@@ -158,7 +158,7 @@ class ContactsDAO:
 
         update_query = f"""
             UPDATE {cls.table_name}
-            SET {', '.join([f"{col}=?" for col in cls.column_names])}
+            SET {", ".join([f"{col}=?" for col in cls.column_names])}
             WHERE CALLSIGN=?
         """
         try:

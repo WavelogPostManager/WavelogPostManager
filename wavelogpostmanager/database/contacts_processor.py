@@ -16,7 +16,6 @@ from typing import Optional
 
 
 class ContactsProcessor:
-
     @staticmethod
     def create_new_contact() -> int:
         ContactsDAO.init()
@@ -314,7 +313,7 @@ class ContactsProcessor:
         print(create_new_list)
         print(f"-{L.get('add_update_confirm2')}")
         print(update_list)
-        if input(f"-{L.get('add_update_confirm3','green')}\n>") == "y":
+        if input(f"-{L.get('add_update_confirm3', 'green')}\n>") == "y":
             ContactsProcessor.add_or_update(
                 add_callsign_list=create_new_list,
                 update_callsign_list=update_list,
@@ -391,12 +390,12 @@ class ContactsProcessor:
         old, new, is_changed = check_diff(old, new)
         if not is_changed:
             return False
-        print(f"-{L.get('update_callsign_old','blue')}")
+        print(f"-{L.get('update_callsign_old', 'blue')}")
         table_show(old)
         print(f"-{L.get('update_callsign_new', 'blue')}")
         table_show(new, from_DB=False)
         ans = input(
-            f"-{L.get('update_callsign_toml1','yellow')}{callsign}{L.get('update_callsign_toml2','yellow')}\n>"
+            f"-{L.get('update_callsign_toml1', 'yellow')}{callsign}{L.get('update_callsign_toml2', 'yellow')}\n>"
         )
         if ans == "y":
             return True

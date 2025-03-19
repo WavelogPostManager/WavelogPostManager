@@ -15,7 +15,6 @@ import prettytable
 
 
 class CommonDAO:
-
     @staticmethod
     def initialize():
         ConfigContext.config_initialize()

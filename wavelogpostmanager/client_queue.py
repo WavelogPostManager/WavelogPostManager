@@ -11,7 +11,6 @@ import sys
 
 
 def queue_go():
-
     from wavelogpostmanager.client import Client
 
     Client.queue()

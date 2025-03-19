@@ -22,7 +22,7 @@ def sign_list_show():
     elif mode == "client":
         CommonDAO.get_signoff_list(isClient=True)
     else:
-        print(f"-{L.get('mode_wrong','red')}")
+        print(f"-{L.get('mode_wrong', 'red')}")
     sys.exit(0)
 
 

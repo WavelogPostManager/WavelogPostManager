@@ -10,6 +10,7 @@ input: the dict list of qso [{zip_code, address, name, callsign, sign-off code, 
 
 create one docx of all envelopes
 """
+
 import shutil
 from docx.shared import Inches
 from docx import Document
@@ -157,7 +158,6 @@ class DocxGenerator:
 
     @staticmethod
     def _sign_off_code_generator(sign_off_code: str) -> int:
-
         code = (
             ConfigContext.config["global"]["sign_off_url"] + "?token=" + sign_off_code
         )

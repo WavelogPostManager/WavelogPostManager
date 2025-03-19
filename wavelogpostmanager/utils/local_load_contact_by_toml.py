@@ -12,7 +12,6 @@ from wavelogpostmanager.database import ContactsProcessor
 
 
 def load_contact(path) -> int:
-
     try:
         with open(path, "rb") as f:
             file_toml = tomli.load(f)
@@ -32,12 +31,11 @@ def load_contact(path) -> int:
 
 
 def add_single(contacts: list) -> (list, list):
-
     new_contact = []
     callsign_list = []
     for contact in contacts:
         if check_essential_field(contact):
-            ans = input(f"-{L.get('field_missing2_confirm','green')}\n>")
+            ans = input(f"-{L.get('field_missing2_confirm', 'green')}\n>")
             if ans == "y":
                 contact = null_transformer(contact)
                 print(contact)
@@ -58,7 +56,7 @@ def check_essential_field(contact: dict) -> bool:
             fields.append(field)
 
     if len(fields) > 0:
-        print(f"-{fields}{L.get('field_missing1','yellow')}{contact}")
+        print(f"-{fields}{L.get('field_missing1', 'yellow')}{contact}")
         return True
     return False
 

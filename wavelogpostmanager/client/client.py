@@ -23,10 +23,10 @@ class Client:
     def queue() -> int:
         test_code = Client.test_connection()
         if test_code == -1:
-            print(f"-{L.get('test_connection_error1','red')}{test_code}")
+            print(f"-{L.get('test_connection_error1', 'red')}{test_code}")
             return -1
         elif test_code == -2:
-            print(f"-{L.get('test_connection_error2','yellow')}{test_code}")
+            print(f"-{L.get('test_connection_error2', 'yellow')}{test_code}")
             return -1
 
         url = url_api("/request")
@@ -68,7 +68,6 @@ class Client:
                 if DocxGenerator.generate_envelops_docx(data["param"]) == 0:
                     ans = input(f"-{L.get('set_sent_confirm', 'green')}\n>")
                     if ans == "y":
-
                         data = {
                             "version": API_VERSION,
                             "token": ConfigContext.config["global"]["token"],

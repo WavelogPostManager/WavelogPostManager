@@ -20,7 +20,6 @@ from wavelogpostmanager.constants.languages import Language as L
 
 
 class ServerRunner:
-
     @classmethod
     def initialize(cls):
         ConfigContext.config_initialize()

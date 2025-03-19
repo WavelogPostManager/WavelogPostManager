@@ -16,10 +16,10 @@ def load_contact(path) -> int:
         with open(path, "rb") as f:
             file_toml = tomli.load(f)
     except FileNotFoundError:
-        print(f"-{L.get('no_file','red')}{path}")
+        print(f"-{L.get('no_file', 'red')}{path}")
         sys.exit(0)
     except tomli.TOMLDecodeError:
-        print(f"-{L.get('toml_format_error','red')}")
+        print(f"-{L.get('toml_format_error', 'red')}")
         sys.exit(0)
 
     from wavelogpostmanager.client import Client
@@ -35,12 +35,11 @@ def load_contact(path) -> int:
 
 
 def add_single(contacts: list) -> (list, list):
-
     new_contact = []
     callsign_list = []
     for contact in contacts:
         if check_essential_field(contact):
-            ans = input(f"-{L.get('field_missing2_confirm','green')}\n>")
+            ans = input(f"-{L.get('field_missing2_confirm', 'green')}\n>")
             if ans == "y":
                 contact = null_transformer(contact)
                 print(contact)
@@ -61,7 +60,7 @@ def check_essential_field(contact: dict) -> bool:
             fields.append(field)
 
     if len(fields) > 0:
-        print(f"-{fields}{L.get('field_missing1','yellow')}{contact}")
+        print(f"-{fields}{L.get('field_missing1', 'yellow')}{contact}")
         return True
     return False
 

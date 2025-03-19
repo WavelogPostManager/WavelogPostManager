@@ -28,7 +28,7 @@ def queue():
         client_queue()
         sys.exit(0)
     else:
-        print(f"-{L.get('mode_wrong','red')}")
+        print(f"-{L.get('mode_wrong', 'red')}")
         sys.exit(1)
 
 

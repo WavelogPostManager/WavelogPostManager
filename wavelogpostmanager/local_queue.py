@@ -32,14 +32,14 @@ def queue_go():
     t = ContactsProcessor.envelope_list_processor(envelope_list)
     if DocxGenerator.generate_envelops_docx(t) == 0:
         SignoffProcessor.insert_queue_db(q_list)
-        ans = input(f"-{L.get('set_sent_confirm','green')}\n>")
+        ans = input(f"-{L.get('set_sent_confirm', 'green')}\n>")
         if ans == "y":
             SignoffProcessor.set_sent(q_list)
             from wavelogpostmanager.mailbot import MailBot
 
             MailBot.init()
             MailBot.send_notification_to_receiver(email_list_transformer(t))
-            print(f"-{L.get('set_sent_confirm_completed','blue')}")
+            print(f"-{L.get('set_sent_confirm_completed', 'blue')}")
             sys.exit(0)
         else:
             sys.exit(0)

@@ -29,7 +29,7 @@ def test_go():
             print(f"-{L.get('test_connection_error2', 'yellow')}")
             return -2
         case 0:
-            print(f"-{L.get('connection_server_success','blue')}")
+            print(f"-{L.get('connection_server_success', 'blue')}")
             pass
         case _:
             print(f"-{L.get('test_connection_error1', 'yellow')}Unknown Error")

@@ -19,7 +19,7 @@ def client_contacts_go() -> int:
     test_server_connection = Client.test_connection()
     match test_server_connection:
         case -3:
-            print(f"-{L.get('timeout','red')}")
+            print(f"-{L.get('timeout', 'red')}")
             return -1
         case -1:
             print(f"-{L.get('status_code_wrong', 'yellow')}")
