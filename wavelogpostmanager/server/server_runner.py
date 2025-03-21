@@ -26,7 +26,13 @@ class ServerRunner:
 
     @classmethod
     def queue_request(cls, data: dict) -> dict:
-        code, q_list, envelope_list = SignoffProcessor.create_new_queue_mysql()
+        if ConfigContext.config["database"]["type"] == "wavelog":
+            code, q_list, envelope_list = SignoffProcessor.create_new_queue_mysql()
+        elif ConfigContext.config["database"]["type"] == "builtin":
+            code, q_list, envelope_list = SignoffProcessor.create_new_queue_builtin()
+        else:
+            return {"return_code": 500}
+
         if code == -5:  # no queued QSL
             return {"return_code": 200, "action": "queue_no_list"}
         elif code == -6:

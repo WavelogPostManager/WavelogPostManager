@@ -16,9 +16,13 @@ def contacts_go():
     from wavelogpostmanager.database import ContactsProcessor, MysqlDAO, ContactsDAO
 
     ContactsDAO.init()
-    mysql_context = config_context.get_mysql_context()
-    if MysqlDAO.test_and_init_connection(mysql_context) != 0:
-        sys.exit(0)
+
+    if ConfigContext.config["database"]["type"] == "wavelog":
+        mysql_context = config_context.get_mysql_context()
+        if MysqlDAO.test_and_init_connection(mysql_context) != 0:
+            sys.exit(0)
+    elif ConfigContext.config["database"]["type"] == "builtin":
+        pass
 
     while True:
         print(f"{L.get('contact_entry_guide')}")

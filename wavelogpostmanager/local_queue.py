@@ -21,11 +21,18 @@ def queue_go():
     config_context = ConfigContext()
 
     config_context.config_init()
-    mysql_context = config_context.get_mysql_context()
     SignoffDAO.initialize()
-    if MysqlDAO.test_and_init_connection(mysql_context) != 0:
-        sys.exit(0)
-    code, q_list, envelope_list = SignoffProcessor.create_new_queue_mysql()
+
+    if ConfigContext.config["database"]["type"] == "wavelog":
+        mysql_context = config_context.get_mysql_context()
+        if MysqlDAO.test_and_init_connection(mysql_context) != 0:
+            sys.exit(0)
+        code, q_list, envelope_list = SignoffProcessor.create_new_queue_mysql()
+    elif ConfigContext.config["database"]["type"] == "builtin":
+        code, q_list, envelope_list = SignoffProcessor.create_new_queue_builtin()
+    else:
+        sys.exit(1)
+
     if code != 0:
         sys.exit(0)
 

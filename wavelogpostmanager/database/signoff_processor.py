@@ -47,6 +47,10 @@ class SignoffProcessor:
         return 0, queue_send_list, envelope_list
 
     @staticmethod
+    def create_new_queue_builtin() -> (int, list, list):
+        pass
+
+    @staticmethod
     def insert_queue_db(queue_send_list: list):
         for qso in queue_send_list:
             SignoffDAO.insert_signoff(
@@ -80,8 +84,13 @@ class SignoffProcessor:
 
     @staticmethod
     def set_sent(queue_list: list):
-        for qso in queue_list:
-            MysqlDAO.set_sent(idx=qso["index"])
+        from wavelogpostmanager.config import ConfigContext
+
+        if ConfigContext.config["database"]["type"] == "wavelog":
+            for qso in queue_list:
+                MysqlDAO.set_sent(idx=qso["index"])
+        elif ConfigContext.config["database"]["type"] == "builtin":
+            pass
 
     @staticmethod
     def get_callsign_by_token(token: str) -> Optional[str]:

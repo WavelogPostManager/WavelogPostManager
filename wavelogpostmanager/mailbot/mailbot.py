@@ -73,8 +73,6 @@ class MailBot:
 
     @classmethod
     def send_notification_to_receiver(cls, email_dict: list) -> int:
-        print(f"{email_dict}")
-        print(f"{cls.notify_receiver}")
         if cls.notify_receiver is False:
             return 0
         email_list, callsign_list = (
