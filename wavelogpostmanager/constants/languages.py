@@ -51,7 +51,7 @@ class Language:
             elif color == "yellow":
                 return yellow(cls.LANGUAGES["en"][key])
             elif color == "default":
-                return cls.LANGUAGES[cls.lang][key]
+                return cls.LANGUAGES["en"][key]
             else:
                 raise ValueError("color must be green, red, blue, yellow or default")
 
