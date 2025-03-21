@@ -62,6 +62,7 @@ def create_toml(path: str, config: dict) -> None:
 
     # create mysql config
     db_table = table()
+    db_table.add("type", config["database"]["type"])
     db_table.add(comment("MySQL config, only in local or server mode"))
     db_table.add(comment("MySQL数据库连接信息，只有local和server模式需要填写"))
     db_table.add("host", config["database"]["host"])
