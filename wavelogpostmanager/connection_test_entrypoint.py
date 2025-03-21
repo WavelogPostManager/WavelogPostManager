@@ -12,13 +12,6 @@ import os
 
 
 def test_go():
-    debug = os.environ.get("DEBUG")
-    from wavelogpostmanager.config import ConfigContext
-
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-    ConfigContext.config_initialize()
     from wavelogpostmanager.utils.show_mode import show_mode
 
     show_mode()
@@ -36,7 +29,7 @@ def test_go():
             print(f"-{L.get('test_connection_error2', 'yellow')}")
             return -2
         case 0:
-            print(f"-{L.get('connection_server_success','blue')}")
+            print(f"-{L.get('connection_server_success', 'blue')}")
             pass
         case _:
             print(f"-{L.get('test_connection_error1', 'yellow')}Unknown Error")

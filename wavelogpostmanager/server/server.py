@@ -9,7 +9,6 @@ from wavelogpostmanager.config import ConfigContext
 
 
 class Server:
-
     @classmethod
     def initialize(cls):
         ConfigContext.config_initialize()

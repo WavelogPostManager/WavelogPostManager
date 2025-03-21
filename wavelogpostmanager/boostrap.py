@@ -17,12 +17,7 @@ from wavelogpostmanager.constants.languages import Language as L
 
 
 def main() -> None:
-    debug = os.environ.get("DEBUG")
     config_context = ConfigContext()
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
-    ConfigContext.config_initialize()
     config_context.config_init()
     from wavelogpostmanager.utils.show_mode import show_mode
 
@@ -56,16 +51,16 @@ def server_start(
         try:
             ssl_context.load_cert_chain(certfile=ssl_ca, keyfile=ssl_key)
         except FileNotFoundError:
-            print(f"-{L.get('ssl_not_found','red')}")
+            print(f"-{L.get('ssl_not_found', 'red')}")
             sys.exit(0)
         server = pywsgi.WSGIServer(
             ("0.0.0.0", port),
             application=listener.wpm_service,
             ssl_context=ssl_context,
         )
-        print(f"-{L.get('listening_on','blue')}https://0.0.0.0:{port}{url}")
+        print(f"-{L.get('listening_on', 'blue')}https://0.0.0.0:{port}{url}")
         server.serve_forever()
     else:
         server = pywsgi.WSGIServer(("0.0.0.0", port), listener.wpm_service)
-        print(f"-{L.get('listening_on','blue')}http://0.0.0.0:{port}{url}")
+        print(f"-{L.get('listening_on', 'blue')}http://0.0.0.0:{port}{url}")
         server.serve_forever()

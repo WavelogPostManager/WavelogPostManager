@@ -77,9 +77,10 @@ class MailBot:
         print(f"{cls.notify_receiver}")
         if cls.notify_receiver is False:
             return 0
-        email_list, callsign_list = [item["email"] for item in email_dict], [
-            item["callsign"] for item in email_dict
-        ]
+        email_list, callsign_list = (
+            [item["email"] for item in email_dict],
+            [item["callsign"] for item in email_dict],
+        )
         for i in range(len(email_list)):
             threading.Thread(
                 target=cls.send_one, args=(email_list[i], callsign_list[i])
