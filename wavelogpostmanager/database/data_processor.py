@@ -6,6 +6,7 @@
 # ide： PyCharm
 # file: data_processor.py
 import datetime
+import sys
 from traceback import format_list
 from wavelogpostmanager.database import MysqlDAO
 
@@ -137,18 +138,61 @@ class DataProcessor:
                 "queued_date": t[2],
                 "index": t[0],
                 "qso_datetime": "Not Available",
+                "received_date": t[3],
             }
             for t in qso_list
         ]
 
     @staticmethod
     def get_rcvd_list() -> list:
+        from wavelogpostmanager.config import ConfigContext
+
+        if ConfigContext.config["database"]["type"] == "wavelog":
+            return DataProcessor.get_rcvd_list_mysql()
+        elif ConfigContext.config["database"]["type"] == "builtin":
+            from wavelogpostmanager.database import BuiltinDAO
+
+            sorted_list = DataProcessor.get_queued_sending_list_builtin(
+                BuiltinDAO.get_receive()
+            )
+            qsos = [
+                {"callsign": t["callsign"], "date": t["received_date"]}
+                for t in sorted_list
+            ]
+            return process_data(qsos)
+        else:
+            print("Wrong database type")
+            return []
+
+    @staticmethod
+    def get_rcvd_list_mysql() -> list:
         raw = MysqlDAO.get_qso_all()
         raw_list = DataProcessor.get_formatted_list(raw, "received")
         return process_data(raw_list)
 
     @staticmethod
     def get_sent_list() -> list:
+        from wavelogpostmanager.config import ConfigContext
+
+        if ConfigContext.config["database"]["type"] == "wavelog":
+            return DataProcessor.get_sent_list_mysql()
+        elif ConfigContext.config["database"]["type"] == "builtin":
+            from wavelogpostmanager.database import BuiltinDAO
+
+            sorted_list = DataProcessor.get_queued_sending_list_builtin(
+                BuiltinDAO.get_send()
+            )
+            qsos = [
+                {"callsign": t["callsign"], "date": t["queued_date"]}
+                for t in sorted_list
+            ]
+            return process_data(qsos)
+        else:
+            print("Wrong database type")
+            return []
+
+    @staticmethod
+    def get_sent_list_mysql() -> list:
         raw = MysqlDAO.get_qso_all()
         raw_list = DataProcessor.get_formatted_list(raw, "sent")
         return process_data(raw_list)
