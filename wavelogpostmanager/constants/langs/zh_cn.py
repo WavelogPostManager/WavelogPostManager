@@ -119,7 +119,8 @@ zh_cn = {
     "wpm_folder_exists": "wpm文件夹已存在",
     "downloading_templates": "正在下载模板至 ",
     "error_when_downloading": "下载模板时出错: ",
-    "init_complete": "初始化完成！",
+    "init_complete": "初始化完成！请编辑wpm配置文件: ",
+    "start_downloading": "开始下载模版文件...",
     # boostrap.py
     "ssl_not_found": "未找到SSL证书/密钥！",
     "listening_on": "Web服务器已启动，监听地址: ",
@@ -128,4 +129,6 @@ zh_cn = {
     "local": "本地模式",
     "server": "服务器模式",
     "client": "客户端模式",
+    # start_check.py
+    "no_wpm_file": "Wavelogpostmanager配置文件将保存至 ",
 }

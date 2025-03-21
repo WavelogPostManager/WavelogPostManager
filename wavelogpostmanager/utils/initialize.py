@@ -25,6 +25,7 @@ def init(path="wpm", check_mode=False) -> None:
 
     create_toml(path=path + "/wpm.toml", config=default_config)
     os.makedirs(path + "/templates", exist_ok=True)
+    L.print("start_downloading", "blue")
     download_file(
         "https://gitee.com/NHJ2001/wmp/raw/master/signoff.html",
         path + "/templates/signoff.html",
@@ -52,7 +53,8 @@ def init(path="wpm", check_mode=False) -> None:
 
     os.makedirs(path + "/docx", exist_ok=True)
     os.makedirs(path + "/logs", exist_ok=True)
-    print(f"-{L.get('init_complete', 'blue')}")
+    print(f"-{L.get('init_complete', 'blue')}{path + '/wpm.toml'}")
+    sys.exit(0)
 
 
 def download_file(url, save_path):

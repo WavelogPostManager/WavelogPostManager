@@ -8,7 +8,6 @@
 import sys
 import platform
 from wavelogpostmanager.constants import core_constant
-from wavelogpostmanager.utils.initialize import init
 
 
 def __environment_check():
@@ -111,7 +110,8 @@ def entrypoint():
         sys.exit(0)
 
     if args.init:
-        init()
+        from wavelogpostmanager.config import ConfigContext
+
         sys.exit(0)
 
     if args.contact:

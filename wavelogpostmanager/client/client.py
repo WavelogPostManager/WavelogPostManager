@@ -406,7 +406,6 @@ class Client:
                 print("-Unknown error")
                 sys.exit(1)
 
-
         for c in update_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
             callsign = new_contact["callsign"]

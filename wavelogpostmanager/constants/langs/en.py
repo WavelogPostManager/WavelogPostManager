@@ -119,7 +119,8 @@ en = {
     "wpm_folder_exists": "wpm folder already exists",
     "downloading_templates": "Downloading templates to ",
     "error_when_downloading": "Error when downloading templates: ",
-    "init_complete": "Initialize Completed!",
+    "init_complete": "Initialize Completed! Please edit configuration file in ",
+    "start_downloading": "Start downloading template files...",
     # boostrap.py
     "ssl_not_found": "SSL ca/key not found!",
     "listening_on": "Web Server starts in ",
