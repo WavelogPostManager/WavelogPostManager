@@ -11,3 +11,4 @@ from .signoff_dao import SignoffDAO
 from .contacts_dao import ContactsDAO
 from .contacts_processor import ContactsProcessor
 from .signoff_processor import SignoffProcessor
+from .builtin_dao import BuiltinDAO

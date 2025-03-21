@@ -99,6 +99,13 @@ def entrypoint():
         action="store_true",
         default=False,
     )
+    parser.add_argument(
+        "-r",
+        "--add_qso",
+        help="add qso in built-in database",
+        action="store_true",
+        default=False,
+    )
     args = parser.parse_args()
     if args.test:
         from wavelogpostmanager.connection_test_entrypoint import test
@@ -149,6 +156,10 @@ def entrypoint():
         from wavelogpostmanager.builtin_qso import BuiltinQSO
 
         BuiltinQSO.menu()
+    if args.add_qso:
+        from wavelogpostmanager.builtin_qso import BuiltinQSO
+
+        BuiltinQSO.new_qso_menu()
 
     if args.start:
         from wavelogpostmanager.boostrap import main

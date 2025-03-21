@@ -142,4 +142,11 @@ en = {
     "(lr) List all received callsigns\n"
     "(d)  Delete one item by index\n"
     "enter [e] to exit",
+    "not_builtin": "You're using wavelog! Built-in QSO database is not available.",
+    "new_qso_type": "Please select qsl type, sent(s) or received(r)\n>",
+    "wrong_type": "Please enter [s] or [r]",
+    "r_qso1": "Please enter the callsigns of QSL cards that you received:",
+    "r_qso2": "Do you want to include these callsigns in the receive list? (y/n)",
+    "s_qso1": "Please enter the callsigns of QSL cards that you will send:",
+    "s_qso2": "Do you want to include these callsigns in the send list? (y/n)",
 }
