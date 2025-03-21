@@ -6,6 +6,7 @@
 # ide： PyCharm
 # file: builtin_qso.py
 import sys
+import prettytable
 
 from wavelogpostmanager.config import ConfigContext
 from wavelogpostmanager.constants.languages import Language as L
@@ -24,13 +25,17 @@ class BuiltinQSO:
             ans = input(f"-{L.get('builtin_menu')}\n>")
             match ans:
                 case "l":
+                    ConfigContext.cl()
                     all_qso = BuiltinDAO.get_all()
-                    print(all_qso)
-                    pass
+                    table_show_qso(all_qso)
                 case "ls":
-                    pass
+                    ConfigContext.cl()
+                    all_qso = BuiltinDAO.get_send()
+                    table_show_qso(all_qso)
                 case "lr":
-                    pass
+                    ConfigContext.cl()
+                    all_qso = BuiltinDAO.get_receive()
+                    table_show_qso(all_qso)
                 case "d":
                     pass
                 case "e":
@@ -82,3 +87,22 @@ class BuiltinQSO:
             case _:
                 L.print("wrong_type", "red")
                 sys.exit(0)
+
+def table_show_qso(qso: list):
+    table = prettytable.PrettyTable()
+    table.field_names = [
+        L.get("ID"),
+        L.get("callsign"),
+        L.get("QUEUE_DATE"),
+        L.get("RCVD_DATE"),
+    ]
+    for s in qso:
+        table.add_row(
+            [
+                s[0],
+                s[1],
+                s[2],
+                s[3],
+            ]
+        )
+    print(table)
