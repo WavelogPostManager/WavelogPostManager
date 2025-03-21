@@ -59,6 +59,7 @@ def table_show_signoff(signoff: list):
         L.get("STATUS"),
         L.get("RCVD_DATE"),
         L.get("SIGNOFF_TIMES"),
+        L.get("database"),
     ]
     for s in signoff:
         table.add_row(
@@ -71,6 +72,7 @@ def table_show_signoff(signoff: list):
                 s["STATUS"],
                 s["RCVD_DATE"],
                 s["SIGNOFF_TIMES"],
+                s["DATABASE"],
             ]
         )
     print(table)

@@ -151,4 +151,6 @@ zh_cn = {
     "s_qso2": "是否要将下列呼号加入待发送列表 (y/n)",
     "d_qso1": "请输入你要删除的QSL记录的index索引:",
     "wrong_index": "请输入正确的索引",
+    # common_dao.py
+    "database": "数据库",
 }

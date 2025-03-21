@@ -26,6 +26,7 @@ class SignoffDAO:
         "STATUS",  # "PENDING" or "DONE"
         "RCVD_DATE",
         "SIGNOFF_TIMES",
+        "DATABASE",
     ]
 
     @classmethod
@@ -86,6 +87,7 @@ class SignoffDAO:
         sent_date: Optional[str],
         token: str,
         status: str = "PENDING",
+        database: str = "builtin",
     ) -> int:
         cls.initialize()
         cls.init()
@@ -98,7 +100,7 @@ class SignoffDAO:
             cursor.execute(
                 f"""
                     INSERT INTO "{cls.table_name}" 
-                    VALUES (?,?, ?, ?, ?, ?, ?,?,?)
+                    VALUES (?,?, ?, ?, ?, ?, ?,?,?,?)
                 """,
                 (
                     index,
@@ -110,6 +112,7 @@ class SignoffDAO:
                     status,
                     None,
                     "0",
+                    database,
                 ),
             )
             conn.commit()
@@ -313,7 +316,7 @@ class SignoffDAO:
         return result
 
     @classmethod
-    def check_index(cls, index: int) -> bool:
+    def check_index(cls, index: int, dtype: str) -> bool:
         cls.initialize()
         cls.init()
         conn = sqlite3.connect(cls.database_path)
@@ -322,9 +325,12 @@ class SignoffDAO:
             f"""
                 SELECT * 
                 FROM "{cls.table_name}" 
-                WHERE ID=?
+                WHERE ID=? and DATABASE=?
             """,
-            (index,),
+            (
+                index,
+                dtype,
+            ),
         )
         result = cursor.fetchone()
         cursor.close()

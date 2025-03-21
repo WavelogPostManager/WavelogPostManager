@@ -151,4 +151,6 @@ en = {
     "s_qso2": "Do you want to include these callsigns in the send list? (y/n)",
     "d_qso1": "Please enter the index of QSL records that you want to delete:",
     "wrong_index": "Please enter the correct index!",
+    # common_dao.py
+    "database": "Database",
 }
