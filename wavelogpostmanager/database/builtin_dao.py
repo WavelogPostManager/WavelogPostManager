@@ -84,24 +84,22 @@ class BuiltinDAO:
             if sr == "send":
                 cursor.execute(
                     f"""
-                                    INSERT INTO "{cls.table_name} (CALLSIGN,SDATE,RDATE)" 
-                                    VALUES (?,?,?)
+                                    INSERT INTO "{cls.table_name}" (CALLSIGN,SDATE) 
+                                    VALUES (?,?)
                                 """,
                     (
                         callsign,
                         date,
-                        None,
                     ),
                 )
             elif sr == "receive":
                 cursor.execute(
                     f"""
-                                    INSERT INTO "{cls.table_name} (CALLSIGN,SDATE,RDATE)" 
-                                    VALUES (?,?,?)
+                                    INSERT INTO "{cls.table_name}" (CALLSIGN,RDATE)
+                                    VALUES (?,?)
                                 """,
                     (
                         callsign,
-                        None,
                         date,
                     ),
                 )
