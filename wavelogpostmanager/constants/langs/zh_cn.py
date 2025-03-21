@@ -135,4 +135,11 @@ zh_cn = {
     "queue_confirm1": "以下呼号的QSL卡片信封封面将生成: ",
     "queue_confirm2": "是否确定生成信封封面?(y/n)",
     "queue_canceled": "信封生成取消",
+    # builtin_qso.py
+    "builtin_menu": "请选择菜单:\n"
+    "(l)  查询所有发送/接收的呼号\n"
+    "(ls) 查询发送的呼号\n"
+    "(lr) 查询接收的呼号\n"
+    "(d)  通过索引删除记录\n"
+    "输入 [e] 退出菜单",
 }

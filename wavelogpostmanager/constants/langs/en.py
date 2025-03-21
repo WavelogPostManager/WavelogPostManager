@@ -135,4 +135,11 @@ en = {
     "queue_confirm1": "The following callsigns' QSL cards will be mailed:",
     "queue_confirm2": "Are you sure generating envelopes?(y/n)",
     "queue_canceled": "Generating canceled",
+    # builtin_qso.py
+    "builtin_menu": "Please choose the menu:\n"
+    "(l)  List all sent/received callsigns\n"
+    "(ls) List all sent callsigns\n"
+    "(lr) List all received callsigns\n"
+    "(d)  Delete one item by index\n"
+    "enter [e] to exit",
 }

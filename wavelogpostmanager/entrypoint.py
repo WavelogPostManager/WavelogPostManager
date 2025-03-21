@@ -92,6 +92,13 @@ def entrypoint():
         action="store_true",
         default=False,
     )
+    parser.add_argument(
+        "-l",
+        "--list_builtin",
+        help="list builtin qso database",
+        action="store_true",
+        default=False,
+    )
     args = parser.parse_args()
     if args.test:
         from wavelogpostmanager.connection_test_entrypoint import test
@@ -137,6 +144,11 @@ def entrypoint():
 
         docx_generate_test()
         sys.exit(0)
+
+    if args.list_builtin:
+        from wavelogpostmanager.builtin_qso import BuiltinQSO
+
+        BuiltinQSO.menu()
 
     if args.start:
         from wavelogpostmanager.boostrap import main
