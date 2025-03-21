@@ -5,6 +5,8 @@
 # datetime： 2025/1/29 18:32
 # ide： PyCharm
 # file: signoff_processor.py
+import sys
+
 from wavelogpostmanager.database import MysqlDAO
 from wavelogpostmanager.database import DataProcessor, SignoffDAO, ContactsProcessor
 import secrets
@@ -17,6 +19,18 @@ import threading
 
 
 class SignoffProcessor:
+    @staticmethod
+    def create_new_queue() -> (int, list, list):
+        from wavelogpostmanager.config import ConfigContext
+
+        if ConfigContext.config["database"]["type"] == "wavelog":
+            return SignoffProcessor.create_new_queue_mysql()
+        elif ConfigContext.config["database"]["type"] == "builtin":
+            return SignoffProcessor.create_new_queue_builtin()
+        else:
+            print("Wrong database type")
+            sys.exit(-1)
+
     @staticmethod
     def create_new_queue_mysql() -> (int, list, list):
         """

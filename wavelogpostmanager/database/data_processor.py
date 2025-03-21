@@ -132,7 +132,13 @@ class DataProcessor:
     @staticmethod
     def get_queued_sending_list_builtin(qso_list: list) -> list:
         return [
-            {"callsign": t[1], "queued_date": t[2], "index": t[0]} for t in qso_list
+            {
+                "callsign": t[1],
+                "queued_date": t[2],
+                "index": t[0],
+                "qso_datetime": "Not Available",
+            }
+            for t in qso_list
         ]
 
     @staticmethod
