@@ -64,6 +64,7 @@ class Client:
             case "queued_list":
                 from wavelogpostmanager.docx_generator import DocxGenerator
 
+                confirm(data["param"])
                 print(f"-{L.get('g_docx')}")
                 if DocxGenerator.generate_envelops_docx(data["param"]) == 0:
                     ans = input(f"-{L.get('set_sent_confirm', 'green')}\n>")
@@ -554,3 +555,15 @@ def check_diff(old: dict, new: dict) -> (dict, dict, bool):
             new[key] = green(new[key])
             is_changed = True
     return old, new, is_changed
+
+
+def confirm(queue_list: list) -> None:
+    callsign_list = [qso["callsign"] for qso in queue_list]
+    L.print("queue_confirm1", "blue")
+    print(callsign_list)
+    ans = input(f"-{L.get('queue_confirm2', 'green')}\n>")
+    if ans == "y":
+        pass
+    else:
+        L.print("queue_canceled", "yellow")
+        sys.exit(0)

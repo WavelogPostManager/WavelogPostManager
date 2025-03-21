@@ -131,4 +131,8 @@ zh_cn = {
     "client": "客户端模式",
     # start_check.py
     "no_wpm_file": "Wavelogpostmanager配置文件将保存至 ",
+    # local_queue.py
+    "queue_confirm1": "以下呼号的QSL卡片信封封面将生成: ",
+    "queue_confirm2": "是否确定生成信封封面?(y/n)",
+    "queue_canceled": "信封生成取消",
 }
