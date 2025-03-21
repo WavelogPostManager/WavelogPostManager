@@ -339,7 +339,7 @@ class Client:
                 update_callsign_list=update_list,
                 contacts=contacts,
             )
-            ConfigContext.cl()
+            # ConfigContext.cl()
             print(f"-{L.get('add_update_success', 'blue')}")
             return 0
         else:
@@ -405,6 +405,7 @@ class Client:
             else:
                 print("-Unknown error")
                 sys.exit(1)
+
 
         for c in update_callsign_list:
             new_contact = Client.find_contact_by_callsign_in_list(c, contacts)
