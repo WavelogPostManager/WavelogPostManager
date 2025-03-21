@@ -36,7 +36,6 @@ class SignoffDAO:
     def init(cls):
         columns = []
         for i, header in enumerate(cls.column_names):
-
             col_def = f'"{header.strip()}"'
             if i == 0:
                 col_def += " INT PRIMARY KEY "  # INDEX
@@ -46,7 +45,7 @@ class SignoffDAO:
 
         create_table_query = f"""
                         CREATE TABLE IF NOT EXISTS "{cls.table_name}" (
-                            {', '.join(columns)}
+                            {", ".join(columns)}
                         )
                     """
 

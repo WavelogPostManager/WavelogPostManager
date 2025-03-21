@@ -11,8 +11,6 @@ import sys
 
 
 def queue_go():
-
-    ConfigContext.config_initialize()
     from wavelogpostmanager.client import Client
 
     Client.queue()

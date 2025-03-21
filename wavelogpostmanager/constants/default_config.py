@@ -24,8 +24,8 @@ default_config = {
     "web_service": {
         "port": 80,
         "ssl": False,
-        "ssl_ca": "./ssl/fullchain.pem",
-        "ssl_key": "./ssl/private.key",
+        "ssl_ca": "fullchain.pem",
+        "ssl_key": "private.key",
         "url_route": "/qsl",
         "api_route": "/api",
         "sign_off_route": "signoff",
@@ -35,11 +35,8 @@ default_config = {
         "sign_off_day": 30,
         "max_sign_off_times": 3,
     },
-    "build_in_database": {
-        "database_path": "./wpm/wpm.db",
-    },
     "docx_generator": {
-        "template_path": "./templates/template.docx",
+        "template_file": "DL.docx",
         "output_path": "./",
     },
     "email_bot": {

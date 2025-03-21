@@ -23,10 +23,10 @@ class Client:
     def queue() -> int:
         test_code = Client.test_connection()
         if test_code == -1:
-            print(f"-{L.get('test_connection_error1','red')}{test_code}")
+            print(f"-{L.get('test_connection_error1', 'red')}{test_code}")
             return -1
         elif test_code == -2:
-            print(f"-{L.get('test_connection_error2','yellow')}{test_code}")
+            print(f"-{L.get('test_connection_error2', 'yellow')}{test_code}")
             return -1
 
         url = url_api("/request")
@@ -68,7 +68,6 @@ class Client:
                 if DocxGenerator.generate_envelops_docx(data["param"]) == 0:
                     ans = input(f"-{L.get('set_sent_confirm', 'green')}\n>")
                     if ans == "y":
-
                         data = {
                             "version": API_VERSION,
                             "token": ConfigContext.config["global"]["token"],
@@ -361,6 +360,9 @@ class Client:
     def update_confirm(callsign: str, new_contact: dict) -> bool:
         old = Client.get_contact(callsign=callsign)
         new = new_contact
+        old, new, is_changed = check_diff(old, new)
+        if not is_changed:
+            return False
         print(f"-{L.get('update_callsign_old', 'blue')}")
         table_show(old)
         print(f"-{L.get('update_callsign_new', 'blue')}")
@@ -534,3 +536,22 @@ def table_show_signoff(signoff: list):
             ]
         )
     print(table)
+
+
+def red(s: str) -> str:
+    return "\033[31m" + s + "\033[0m"
+
+
+def green(s: str) -> str:
+    return "\033[32m" + s + "\033[0m"
+
+
+def check_diff(old: dict, new: dict) -> (dict, dict, bool):
+    keys = ["country", "address", "name", "zip_code", "phone", "email"]
+    is_changed = False
+    for key in keys:
+        if old[key.upper()] != new[key]:
+            old[key.upper()] = red(old[key.upper()])
+            new[key] = green(new[key])
+            is_changed = True
+    return old, new, is_changed

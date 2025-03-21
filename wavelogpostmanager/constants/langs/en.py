@@ -128,4 +128,6 @@ en = {
     "local": "Local",
     "server": "Server",
     "client": "Client",
+    # start_check.py
+    "no_wpm_file": "Wavelogpostmanager will be installed in ",
 }

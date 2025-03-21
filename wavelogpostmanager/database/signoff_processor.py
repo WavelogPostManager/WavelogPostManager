@@ -17,7 +17,6 @@ import threading
 
 
 class SignoffProcessor:
-
     @staticmethod
     def create_new_queue_mysql() -> (int, list, list):
         SignoffDAO.init()
@@ -26,12 +25,12 @@ class SignoffProcessor:
         queue_send_list = DataProcessor.get_queued_sending_list(qso_list)
         queue_send_list = SignoffProcessor.remove_existing_signoff(queue_send_list)
         if len(queue_send_list) == 0:
-            print(f"{L.get('no_queue','yellow')}")
+            print(f"{L.get('no_queue', 'yellow')}")
             return -5, None, None
         callsign_list = [qso["callsign"] for qso in queue_send_list]
         code, not_found_list = SignoffProcessor.check_contacts(callsign_list)
         if not_found_list is not None:
-            print(f"{L.get('callsign_not_in_contact','yellow')}")
+            print(f"{L.get('callsign_not_in_contact', 'yellow')}")
             table_show(not_found_list)
             return -6, not_found_list, None
 
@@ -104,9 +103,6 @@ class SignoffProcessor:
 
 def send_email(time: str, callsign: str) -> int:
     from wavelogpostmanager.config import ConfigContext
-
-    ConfigContext.config_initialize()
-
     from wavelogpostmanager.mailbot import MailBot
 
     MailBot.send_notification(time, callsign)

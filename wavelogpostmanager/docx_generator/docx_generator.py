@@ -10,6 +10,7 @@ input: the dict list of qso [{zip_code, address, name, callsign, sign-off code, 
 
 create one docx of all envelopes
 """
+
 import shutil
 from docx.shared import Inches
 from docx import Document
@@ -24,11 +25,11 @@ from wavelogpostmanager.config import ConfigContext
 
 class DocxGenerator:
     # default generator folder
-    path = r"./docx"
+    path = ConfigContext.docx_path
     # hidden folder of docx
-    mid_folder = r".docx"
+    mid_folder = path + "/.docx"
     # hidden folder of img
-    img_folder = r".img"
+    img_folder = path + "/.img"
     # qr generate config
     qr_context = {
         "version": 1,
@@ -41,14 +42,16 @@ class DocxGenerator:
     def _init():
         if not os.path.exists(DocxGenerator.path):
             os.mkdir(DocxGenerator.path)
-        if not os.path.exists(DocxGenerator.path + "/" + DocxGenerator.mid_folder):
-            os.mkdir(DocxGenerator.path + "/" + DocxGenerator.mid_folder)
-        if not os.path.exists(DocxGenerator.path + "/" + DocxGenerator.img_folder):
-            os.mkdir(DocxGenerator.path + "/" + DocxGenerator.img_folder)
+        if not os.path.exists(DocxGenerator.mid_folder):
+            os.mkdir(DocxGenerator.mid_folder)
+        if not os.path.exists(DocxGenerator.img_folder):
+            os.mkdir(DocxGenerator.img_folder)
 
     @staticmethod
     def _check_template() -> int:
-        template_path = ConfigContext.config["docx_generator"]["template_path"]
+        template_path = get_template_path(
+            ConfigContext.config["docx_generator"]["template_file"]
+        )
         if not os.path.exists(template_path):
             print(f"-{L.get('template_not_found')}")
             print(f"-{L.get('template_not_found_hint')}{DocxGenerator.path}")
@@ -62,7 +65,9 @@ class DocxGenerator:
             return 1
 
         for idx, qso in enumerate(qso_list):
-            template_path = ConfigContext.config["docx_generator"]["template_path"]
+            template_path = get_template_path(
+                ConfigContext.config["docx_generator"]["template_file"]
+            )
             doc = Document(template_path)
             for paragraph in doc.paragraphs:
                 if "{{zip_code}}" in paragraph.text:
@@ -90,29 +95,17 @@ class DocxGenerator:
                         DocxGenerator._sign_off_code_generator(qso["sign_off_code"])
                         == 0
                     ):
-                        path = (
-                            DocxGenerator.path
-                            + "/"
-                            + DocxGenerator.img_folder
-                            + "/"
-                            + "qr.png"
-                        )
+                        path = DocxGenerator.img_folder + "/" + "qr.png"
                         paragraph.add_run().add_picture(path, width=Inches(1.0))
 
-            filename = (
-                DocxGenerator.path
-                + "/"
-                + DocxGenerator.mid_folder
-                + "/"
-                + f"qsl_card_envelope_{idx}.docx"
-            )
+            filename = DocxGenerator.mid_folder + "/" + f"qsl_card_envelope_{idx}.docx"
             doc.save(filename)
 
         return 0
 
     @staticmethod
     def _merge():
-        paths = DocxGenerator.path + "/" + DocxGenerator.mid_folder
+        paths = DocxGenerator.mid_folder
         paths_of_docx = DocxGenerator._find_docx_files_glob(paths)
         base_doc = Document(paths_of_docx[0])
         composer = Composer(base_doc)
@@ -160,14 +153,11 @@ class DocxGenerator:
     def generate_envelops_docx(qso: list) -> int:
         DocxGenerator._generator_all_envelopes(qso_list=qso)
         DocxGenerator._merge()
-        DocxGenerator._delete_temp_files(
-            folder_path=DocxGenerator.path + "/" + DocxGenerator.mid_folder
-        )
+        DocxGenerator._delete_temp_files(folder_path=DocxGenerator.mid_folder)
         return 0
 
     @staticmethod
     def _sign_off_code_generator(sign_off_code: str) -> int:
-
         code = (
             ConfigContext.config["global"]["sign_off_url"] + "?token=" + sign_off_code
         )
@@ -176,9 +166,13 @@ class DocxGenerator:
         qr.add_data(code)
         qr.make(fit=True)
         img = qr.make_image(fill_color="black", back_color="white")
-        path = DocxGenerator.path + "/" + DocxGenerator.img_folder + "/" + "qr.png"
+        path = DocxGenerator.img_folder + "/" + "qr.png"
         img.save(path)
         return 0
+
+
+def get_template_path(p: str) -> str:
+    return ConfigContext.templates_path + "/" + p
 
 
 if __name__ == "__main__":

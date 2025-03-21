@@ -14,9 +14,6 @@ def docx_generate_test_go():
 
     from wavelogpostmanager.config import ConfigContext
 
-    if debug == "1":
-        ConfigContext.config_path = "./wpm/wpm.toml"
-        ConfigContext.db_path = "./wpm/wpm.db"
     qso_list = [
         {
             "zip_code": "123456",
@@ -59,7 +56,6 @@ def docx_generate_test_go():
             "phone_number": "555-555-5559",
         },
     ]
-    ConfigContext.config_initialize()
     from wavelogpostmanager.docx_generator import DocxGenerator
 
     DocxGenerator.generate_envelops_docx(qso_list)
