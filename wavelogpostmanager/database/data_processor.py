@@ -130,6 +130,12 @@ class DataProcessor:
         ]
 
     @staticmethod
+    def get_queued_sending_list_builtin(qso_list: list) -> list:
+        return [
+            {"callsign": t[1], "queued_date": t[2], "index": t[0]} for t in qso_list
+        ]
+
+    @staticmethod
     def get_rcvd_list() -> list:
         raw = MysqlDAO.get_qso_all()
         raw_list = DataProcessor.get_formatted_list(raw, "received")

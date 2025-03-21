@@ -19,6 +19,11 @@ import threading
 class SignoffProcessor:
     @staticmethod
     def create_new_queue_mysql() -> (int, list, list):
+        """
+        Create a new queue for MySQL database.
+
+        :return: A tuple containing the status code, list of queued sending QSOs, and list of envelopes.
+        """
         SignoffDAO.init()
         ContactsDAO.init()
         qso_list = MysqlDAO.get_qso_all()
@@ -48,10 +53,50 @@ class SignoffProcessor:
 
     @staticmethod
     def create_new_queue_builtin() -> (int, list, list):
-        pass
+        """
+        Create a new queue for the built-in database.
+
+        :return: A tuple containing the status code, list of queued sending QSOs, and list of envelopes.
+        """
+        SignoffDAO.init()
+        ContactsDAO.init()
+        from wavelogpostmanager.database import BuiltinDAO
+
+        qso_list = BuiltinDAO.get_send()
+        queue_send_list = DataProcessor.get_queued_sending_list_builtin(qso_list)
+        queue_send_list = SignoffProcessor.remove_existing_signoff(queue_send_list)
+        if len(queue_send_list) == 0:
+            print(f"{L.get('no_queue', 'yellow')}")
+            return -5, None, None
+        callsign_list = [qso["callsign"] for qso in queue_send_list]
+        code, not_found_list = SignoffProcessor.check_contacts(callsign_list)
+        if not_found_list is not None:
+            print(f"{L.get('callsign_not_in_contact', 'yellow')}")
+            table_show(not_found_list)
+            return -6, not_found_list, None
+
+        envelope_list = []
+        for qso in queue_send_list:
+            token = generate_token()
+            envelope = {
+                "callsign": qso["callsign"],
+                "token": token,
+            }
+            qso["token"] = token
+            envelope_list.append(envelope)
+
+        return 0, queue_send_list, envelope_list
 
     @staticmethod
     def insert_queue_db(queue_send_list: list):
+        """
+        Insert the queue into the database.
+
+        :param queue_send_list: List of QSOs to be inserted into the database.
+        """
+        from wavelogpostmanager.config import ConfigContext
+
+        dtype = ConfigContext.config["database"]["type"]
         for qso in queue_send_list:
             SignoffDAO.insert_signoff(
                 index=qso["index"],
@@ -61,10 +106,17 @@ class SignoffProcessor:
                 status="PENDING",
                 token=qso["token"],
                 sent_date=None,
+                database=dtype,
             )
 
     @staticmethod
     def check_contacts(callsign_list: list) -> (int, list):
+        """
+        Check if the contacts exist in the database.
+
+        :param callsign_list: List of callsigns to check.
+        :return: A tuple containing the status code and list of not found callsigns.
+        """
         not_found_list = []
         for callsign in callsign_list:
             if not ContactsProcessor.search_contact(callsign):
@@ -76,14 +128,28 @@ class SignoffProcessor:
 
     @staticmethod
     def remove_existing_signoff(queue_list: list) -> list:
+        """
+        Remove existing signoffs from the queue list.
+
+        :param queue_list: List of QSOs to be checked for existing signoffs.
+        :return: A list of QSOs without existing signoffs.
+        """
+        from wavelogpostmanager.config import ConfigContext
+
+        dtype = ConfigContext.config["database"]["type"]
         new_list = []
         for qso in queue_list:
-            if not SignoffDAO.check_index(index=qso["index"]):
+            if not SignoffDAO.check_index(index=qso["index"], dtype=dtype):
                 new_list.append(qso)
         return new_list
 
     @staticmethod
     def set_sent(queue_list: list):
+        """
+        Set the QSOs in the queue list as sent.
+
+        :param queue_list: List of QSOs to be marked as sent.
+        """
         from wavelogpostmanager.config import ConfigContext
 
         if ConfigContext.config["database"]["type"] == "wavelog":
@@ -94,6 +160,12 @@ class SignoffProcessor:
 
     @staticmethod
     def get_callsign_by_token(token: str) -> Optional[str]:
+        """
+        Get the callsign by the given token.
+
+        :param token: The token to search for.
+        :return: The callsign associated with the token, or None if not found.
+        """
         if not SignoffDAO.search_token(token=token):
             return None
         callsign = SignoffDAO.get_callsign(token=token)
@@ -111,6 +183,13 @@ class SignoffProcessor:
 
 
 def send_email(time: str, callsign: str) -> int:
+    """
+    Send an email notification.
+
+    :param time: The time of the notification.
+    :param callsign: The callsign to notify.
+    :return: The status code of the email sending process.
+    """
     from wavelogpostmanager.config import ConfigContext
     from wavelogpostmanager.mailbot import MailBot
 
@@ -119,6 +198,11 @@ def send_email(time: str, callsign: str) -> int:
 
 
 def table_show(callsign_list: list):
+    """
+    Display the callsign list in a table format.
+
+    :param callsign_list: List of callsigns to display.
+    """
     table = prettytable.PrettyTable()
     table.field_names = [
         L.get("callsign"),
@@ -133,6 +217,11 @@ def table_show(callsign_list: list):
 
 
 def generate_token():
+    """
+    Generate a random token.
+
+    :return: A random token string.
+    """
     return secrets.token_hex(8)
 
 
