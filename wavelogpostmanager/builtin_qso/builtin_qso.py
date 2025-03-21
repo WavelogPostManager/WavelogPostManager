@@ -37,7 +37,21 @@ class BuiltinQSO:
                     all_qso = BuiltinDAO.get_receive()
                     table_show_qso(all_qso)
                 case "d":
-                    pass
+                    ConfigContext.cl()
+                    all_qso = BuiltinDAO.get_all()
+                    table_show_qso(all_qso)
+                    L.print("d_qso1", "green")
+                    index = input(">")
+                    if not index.isdigit():
+                        L.print("wrong_index", "red")
+                        sys.exit(1)
+
+                    if BuiltinDAO.delete_qso(index=int(index)) != 0:
+                        L.print("delete_failed", "red")
+                        sys.exit(1)
+                    else:
+                        L.print("delete_success", "blue")
+                        continue
                 case "e":
                     break
                 case _:
@@ -87,6 +101,7 @@ class BuiltinQSO:
             case _:
                 L.print("wrong_type", "red")
                 sys.exit(0)
+
 
 def table_show_qso(qso: list):
     table = prettytable.PrettyTable()

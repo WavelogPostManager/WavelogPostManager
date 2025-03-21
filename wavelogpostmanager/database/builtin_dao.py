@@ -175,16 +175,11 @@ class BuiltinDAO:
         cursor = conn.cursor()
         code = -1
         try:
-            cursor.execute(
-                f"""
-                                    DELETE FROM "{cls.table_name}" 
-                                    WHERE INDEX = ?
-                                """,
-                (index,),
-            )
+            delete_query = f"DELETE FROM {cls.table_name} WHERE [INDEX]=?"
+            cursor = conn.execute(delete_query, (index,))
             conn.commit()
             code = 0
-        except sqlite3.IntegrityError:
+        except sqlite3.IntegrityError as e:
             code = -2
         finally:
             cursor.close()
