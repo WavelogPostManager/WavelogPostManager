@@ -131,4 +131,8 @@ en = {
     "client": "Client",
     # start_check.py
     "no_wpm_file": "Wavelogpostmanager will be installed in ",
+    # local_queue.py
+    "queue_confirm1": "The following callsigns' QSL cards will be mailed:",
+    "queue_confirm2": "Are you sure generating envelopes?(y/n)",
+    "queue_canceled": "Generating canceled",
 }

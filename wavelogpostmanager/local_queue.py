@@ -27,7 +27,9 @@ def queue_go():
         sys.exit(0)
     code, q_list, envelope_list = SignoffProcessor.create_new_queue_mysql()
     if code != 0:
-        sys.exit(1)
+        sys.exit(0)
+
+    confirm(envelope_list)
 
     t = ContactsProcessor.envelope_list_processor(envelope_list)
     if DocxGenerator.generate_envelops_docx(t) == 0:
@@ -67,3 +69,15 @@ def queue():
     except Exception as e:
         print(e)
         sys.exit(1)
+
+
+def confirm(queue_list: list) -> None:
+    callsign_list = [qso["callsign"] for qso in queue_list]
+    L.print("queue_confirm1", "blue")
+    print(callsign_list)
+    ans = input(f"-{L.get('queue_confirm2', 'green')}\n>")
+    if ans == "y":
+        pass
+    else:
+        L.print("queue_canceled", "yellow")
+        sys.exit(0)
